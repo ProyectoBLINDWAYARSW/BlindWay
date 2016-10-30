@@ -28,7 +28,7 @@ public class GameController {
     public String test(){
         return "Ok";
     }
-    @RequestMapping(path = "/maze?{x}&{y}", method = RequestMethod.GET)
+    @RequestMapping(path = "/maze/s{x}&{y}", method = RequestMethod.GET)
     public ResponseEntity<?> getCurrentWord(@PathVariable Integer x, Integer y){
         System.out.println(x+ " " +y+ " "+map);
         map.buildMaze(x,y);
