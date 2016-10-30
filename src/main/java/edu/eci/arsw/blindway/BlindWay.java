@@ -5,6 +5,7 @@
  */
 package edu.eci.arsw.blindway;
 
+import edu.eci.arsw.blindway.entities.Mapa;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -12,9 +13,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * @author Hugo Alvarez
  */
-@SpringBootApplication
+//@SpringBootApplication
 public class BlindWay {
-    public static void main(String[] args) { 		
-        SpringApplication.run(BlindWay.class, args); 
+    public static void main(String[] args) {
+        int x = args.length >= 1 ? (Integer.parseInt(args[0])) : 20;
+        int y = args.length == 2 ? (Integer.parseInt(args[1])) : 20;
+        MazeGenerator maze = new MazeGenerator(x, y);
+        maze.display();
+        maze.print();
+        System.out.println("Entro");
+        //Mapa map = new Mapa(3, 3);
+        //map.buildMaze();
+        //SpringApplication.run(BlindWay.class, args); 
     }
 }
