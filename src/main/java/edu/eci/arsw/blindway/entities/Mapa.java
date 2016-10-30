@@ -1,55 +1,52 @@
 package edu.eci.arsw.blindway.entities;
 
-import edu.eci.arsw.blindway.maze.KruskalAlgorithmMaze;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+
+import edu.eci.arsw.blindway.mazegenerator.MazeGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 /**
  * 
  * @author Hugo Alvarez
  */
+@Service
 public class Mapa {
 
-	private Posicion inicio;
+	private final int inicioX;
+        private final int inicioY;
 
-	private Posicion fin;
+	private int finX;
+        private int finY;
 
-	private List<List<Posicion>> celdas;
+	private int[][] celdas;
         
-        private List<Posicion> listceldas;
+        private int n;
         
-        private int sizeN;
+        private int m;
         
-        private int sizeM;
-        
-        private KruskalAlgorithmMaze kam;
+        @Autowired
+        private MazeGenerator kam;
         
         /**
          * 
          * @param sizeM filas
          * @param sizeN columnas
          */
-        public Mapa(int sizeM, int sizeN){
-            this.sizeM=sizeM;
-            this.sizeN=sizeN;
-            celdas = new ArrayList<>();
-            listceldas = new LinkedList<>();
-            for (int i = 0; i < this.sizeM; i++) {
-                celdas.add(new ArrayList<>());
-                for (int j = 0; j < this.sizeN; j++) {
-                    celdas.get(i).add(new Posicion(i,j));
-                    listceldas.add(new Posicion(i, j));
-                }
-            }
+        public Mapa(){
+            inicioX = 0;
+            inicioY = 0;
         }
         
-        public void buildMaze(){
-            System.out.println("Entro aqui tambien 1");
-            kam=new KruskalAlgorithmMaze(listceldas,sizeM,sizeN);
-            System.out.println("Entro aqui tambien 2");
-            kam.kruskal();
+        public void buildMaze(int n, int m){      
+            this.n=n;
+            this.m=m;
+            celdas = new int [n][m];
+            kam.build(n,m);
             System.out.println("Entro aqui tambien 3");
-            kam.print();
+            celdas=kam.getMaze();
         }
+        public String display(){
+            return kam.display();
+        }
+        
 
 }

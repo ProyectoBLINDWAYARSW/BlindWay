@@ -4,7 +4,9 @@ package edu.eci.arsw.blindway.entities;
 
 public class Carro {
 
-	private Posicion posicion;
+	private int x;
+        
+        private int y;
 
 	private String direccion;
 
