@@ -19,5 +19,20 @@ public class Sala {
 	public void InvitacionAmigos() {
 
 	}
+        
+        public void InvitacionAmigo(Usuario amigo) {
+
+	}
+        
+        public boolean ingresarSala(Usuario jugador){
+            boolean verificacion=false;
+            if(jugador2==null){
+                if(!expulsados.contains(jugador)){
+                    jugador2=jugador;
+                    verificacion=true;
+                }
+            }
+            return verificacion;
+        }
 
 }
