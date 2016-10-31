@@ -1,5 +1,6 @@
 package edu.eci.arsw.blindway.entities;
 
+import edu.eci.arsw.blindway.persistence.StubUsuario;
 import java.util.List;
 
 public class Sala {
@@ -11,6 +12,8 @@ public class Sala {
 	private List<Usuario> expulsados;
 
 	private String contraseña;
+        
+        private StubUsuario data = StubUsuario.getInstance();
 
 	public void invitacionGlobal() {
 
