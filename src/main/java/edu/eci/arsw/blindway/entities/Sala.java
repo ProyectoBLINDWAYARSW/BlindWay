@@ -20,7 +20,12 @@ public class Sala {
 	}
 
 	public void InvitacionAmigos() {
-
+                for(Usuario u:jugador1.getAmigos()){
+                    //A cada amigo conectado que tenga el usuario 1(dueño de la sala se le envia una invitación)
+                    if(u.isConectado()){
+                        
+                    }
+                }
 	}
         
         public void InvitacionAmigo(Usuario amigo) {

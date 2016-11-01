@@ -23,6 +23,8 @@ public class Usuario {
         
     private List<Integer> estadisticas;
     
+    private boolean conectado;
+    
     public Usuario(String nombre, int edad, String genero, String nickname, String contraseña, String correoElectronico) {
         this.nombre = nombre;
         this.edad = edad;
@@ -30,6 +32,7 @@ public class Usuario {
         this.nickname = nickname;
         this.contraseña = contraseña;
         this.correoElectronico = correoElectronico;
+        this.conectado=false;
     }
     
     @Override
@@ -161,6 +164,20 @@ public class Usuario {
      */
     public void setEstadisticas(List<Integer> estadisticas) {
         this.estadisticas = estadisticas;
+    }
+
+    /**
+     * @return the conectado
+     */
+    public boolean isConectado() {
+        return conectado;
+    }
+
+    /**
+     * @param conectado the conectado to set
+     */
+    public void setConectado(boolean conectado) {
+        this.conectado = conectado;
     }
     
 

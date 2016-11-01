@@ -72,7 +72,6 @@ public class StubUsuario {
        usuarios.clear();
     }
     public void cargarUsuariosEstaticos(){
-        usuarios.clear();
         Usuario u = new Usuario("Usuario Prueba",20,"Masculino","Admin","admin123","admin@gmail.com");
         usuarios.add(u);   
     }

@@ -40,6 +40,7 @@ public class RecursiveMazeGenerator implements MazeGenerator{
                 sb.append((maze[j][i] & 1) == 0 ? "+---" : "+   ");
             }
             System.out.println("+");
+            sb.append("+\n");
             // draw the west edge
             for (int j = 0; j < x; j++) {
                 if(j==0 && i==0)System.out.print("    ");
@@ -49,8 +50,8 @@ public class RecursiveMazeGenerator implements MazeGenerator{
             }
             if(i==y-1) System.out.println(" ");
             else System.out.println("|");
-            if(i==y-1) sb.append(" ");
-            else sb.append("|");
+            if(i==y-1) sb.append(" \n");
+            else sb.append("|\n");
         }
         // draw the bottom line
         for (int j = 0; j < x; j++) {
@@ -58,7 +59,8 @@ public class RecursiveMazeGenerator implements MazeGenerator{
             sb.append("+---");
         }
         System.out.println("+");
-        sb.append("+");
+        sb.append("+\n");
+        System.out.println(sb);
         return sb.toString();
     }
     

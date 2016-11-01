@@ -28,8 +28,8 @@ public class GameController {
     public String test(){
         return "Ok";
     }
-    @RequestMapping(path = "/maze/s{x}&{y}", method = RequestMethod.GET)
-    public ResponseEntity<?> getCurrentWord(@PathVariable Integer x, Integer y){
+    @RequestMapping(path = "/maze/{x}/{y}", method = RequestMethod.GET)
+    public ResponseEntity<?> getCurrentWord(@PathVariable Integer x,@PathVariable Integer y){
         System.out.println(x+ " " +y+ " "+map);
         map.buildMaze(x,y);
         return new ResponseEntity<>(map.display(),HttpStatus.ACCEPTED);
