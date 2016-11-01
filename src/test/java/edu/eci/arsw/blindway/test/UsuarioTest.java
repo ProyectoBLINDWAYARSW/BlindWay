@@ -1,3 +1,5 @@
+package edu.eci.arsw.blindway.test;
+
 
 import edu.eci.arsw.blindway.entities.Usuario;
 import edu.eci.arsw.blindway.persistence.StubUsuario;

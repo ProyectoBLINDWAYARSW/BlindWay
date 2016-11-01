@@ -23,22 +23,26 @@ public class Mapa {
         
         private int m;
         
+        private final Carro carro;
+        
         @Autowired
         private MazeGenerator kam;
         
-        /**
-         * 
-         * @param sizeM filas
-         * @param sizeN columnas
-         */
-        public Mapa(){
+        public Mapa()throws BlindWayException{
             inicioX = 0;
             inicioY = 0;
+            carro = new Carro(0, 0, "Fijo");
         }
-        
+        /**
+         * 
+         * @param n filas
+         * @param m columnas
+         */
         public void buildMaze(int n, int m){      
             this.n=n;
             this.m=m;
+            finX=n-1;
+            finY=m-1;
             celdas = new int [n][m];
             kam.build(n,m);
             System.out.println("Entro aqui tambien 3");
@@ -47,6 +51,18 @@ public class Mapa {
         public String display(){
             return kam.display();
         }
-        
-
+        public void moveUp() throws BlindWayException{
+            if(carro.getY()+1>=m) throw new BlindWayException("No se puede mover arriba");
+            carro.moverseY(1);
+        }
+        public void moveDown()throws BlindWayException{
+            carro.moverseY(-1);
+        }
+        public void moveLeft()throws BlindWayException{
+            carro.moverseX(-1);
+        }
+        public void moveRight()throws BlindWayException{
+            if(carro.getX()+1>=n) throw new BlindWayException("No se puede mover a la derecha");
+            carro.moverseX(1);
+        }
 }
