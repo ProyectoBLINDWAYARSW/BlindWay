@@ -1,1 +1,14 @@
 
+#titulo {
+    font: oblique bold 120% cursive;
+    color: black;
+    background-image: url("1.jpg");
+    text-align: center;
+    font-size: 90px;
+    
+}
+
+#botonregistro {
+    color: red;
+    
+}
