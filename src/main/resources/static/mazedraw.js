@@ -1,4 +1,23 @@
 
+var myGamePiece;
+var myObstacles = [];
+var myScore;
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = bw;
+        this.canvas.height = bh;
+        this.context = this.canvas.getContext("2d");
+        document.body.
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.frameNo = 0;
+    },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+};
+
 //grid width and height
 var bw = 400;
 var bh = 400;
@@ -7,20 +26,13 @@ var p = 10;
 //size of canvas
 var cw = bw + (p * 2) + 1;
 var ch = bh + (p * 2) + 1;
-var y = 4;
-var x = 5;
-var canvas = $('<canvas/>').attr({
-  width: cw,
-  height: ch
-}).appendTo('body');
-var maze = [
-  [2,5,6,5],
-  [4,10,9,12],
-  [14,7,5,12],
-  [12,12,8,12],
-  [8,10,3,9]
-]
-var context = canvas.get(0).getContext("2d");
+var y = 6;
+var x = 7;
+myGameArea.start();
+console.log(myGameArea);
+var maze;
+var context = myGameArea.context;
+
 
 function drawBoard() {
 	console.log("Entra a dibujar");
@@ -40,7 +52,7 @@ function drawBoard() {
     yy = 40;
     for (var j = 0; j < x; j++) {
 
-      if ((maze[j][i] & 1) == 0) {
+      if ((maze[j][i] & 1) === 0) {
         context.moveTo(0.5 + xx + p,(p * (i + 1) + (yy*i)));
         context.lineTo(0.5 + (yy*(j+1)) + p,(p * (i + 1) + (yy*i)));
       } else {
@@ -53,7 +65,7 @@ function drawBoard() {
     yy = 50;
     console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><");
     for (var j = 0; j < x; j++) {
-      if((maze[j][i]&8)==0 && (i!=0 || j!=0)){
+      if((maze[j][i]&8)===0 && (i!==0 || j!==0)){
       	console.log("Entro a 1");
         context.moveTo(0.5 + xx + p, (p + (yy*i)));
         context.lineTo(0.5 + xx + p,(p+ (yy*(i+1))+0.5));
@@ -80,4 +92,7 @@ function drawBoard() {
   context.stroke();
 }
 
-drawBoard();
+$.get("/blindway/maze/"+x+"/"+y, function(data){
+    console.log("Entro "+data);
+    maze=data;
+}).then(drawBoard());

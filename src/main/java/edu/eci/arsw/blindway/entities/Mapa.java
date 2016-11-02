@@ -46,7 +46,6 @@ public class Mapa {
         finY=m-1;
         celdas = new int [n][m];
         kam.build(n,m);
-        System.out.println("Entro aqui tambien 3");
         celdas=kam.getMaze();
     }
     public String display(){

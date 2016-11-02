@@ -31,7 +31,6 @@ public class GameController {
     }
     @RequestMapping(path = "/maze/{x}/{y}", method = RequestMethod.GET)
     public ResponseEntity<?> getCurrentWord(@PathVariable Integer x,@PathVariable Integer y) throws BlindWayException{
-        System.out.println(x+ " " +y+ " "+map);
         map.buildMaze(x,y);
         return new ResponseEntity<>(map.display(),HttpStatus.ACCEPTED);
     }

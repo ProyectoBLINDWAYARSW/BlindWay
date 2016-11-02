@@ -33,42 +33,18 @@ public class RecursiveMazeGenerator implements MazeGenerator{
 
     public String display() {
         StringBuilder sb = new StringBuilder();
+        sb.append("[");
         for (int i = 0; i < y; i++) {
-            // draw the north edge
-            for (int j = 0; j < x; j++) {
-                System.out.print((maze[j][i] & 1) == 0 ? "+---" : "+   ");
-                sb.append(maze[j][i]).append(",");
+            sb.append("[");
+            sb.append(maze[0][i]);
+            for (int j = 1; j < x; j++) {   
+                sb.append(",").append(maze[j][i]);
             }
-            System.out.println("+");
-            sb.append("<br>");
-            // draw the west edge
-            for (int j = 0; j < x; j++) {
-                if(j==0 && i==0)System.out.print("    ");
-                else System.out.print((maze[j][i] & 8) == 0? "|   " : "    ");
-                //sb.append(maze[j][i]).append(",");
-            }
-            if(i==y-1) System.out.println(" ");
-            else System.out.println("|");
-            //sb.append("<br>");
+            if(i==y-1)sb.append("]");
+            else sb.append("],");
         }
-        // draw the bottom line
-        for (int j = 0; j < x; j++) {
-            System.out.print("+---");
-            //sb.append("+---");
-        }
-        System.out.println("+");
-        //sb.append("+<br>");
-        System.out.println(sb);
+        sb.append("]");
         return sb.toString();
-    }
-    
-    public void print(){
-        for(int i = 0; i < x; i++){
-            for(int j = 0; j < y; j++){
-                System.out.print(maze[i][j]+" ");
-            }
-            System.out.println("");
-        }
     }
     private void generateMaze(int cx, int cy) {
         DIR[] dirs = DIR.values();

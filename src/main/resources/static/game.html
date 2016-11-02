@@ -12,12 +12,9 @@ and open the template in the editor.
         <script src="/webjars/jquery/jquery.min.js"></script>
         <script src="/webjars/sockjs-client/sockjs.min.js"></script>
         <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-        <script src="/game.js"></script>
+        <script src="/mazedraw.js"></script>
     </head>
-    <body onload="startGame()">
-        <br>
-<button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
-<p>Use the ACCELERATE button to stay in the air</p>
-<p>How long can you stay alive?</p>
+    <body onload="drawBoard()">
+        
     </body>
 </html>
