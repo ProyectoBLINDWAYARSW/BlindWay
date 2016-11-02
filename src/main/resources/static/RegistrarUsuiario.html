@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <title>BLIND WAY</title>
         <link rel="stylesheet" type="text/css" href="styles.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script type="text/javascript" src="RegistrarUsuario.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
         
     </head>
@@ -31,37 +32,37 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <table id="tablaregistrarse" >
             <tr>
                 <td align="center">Nombre : </td>
-                <td><input type="text" name="nombre"></td>
+                <td><input id="nombre" type="text" name="nombre"></td>
             </tr>
             <tr>
                 <td>Edad :</td>
-                <td><input type="text" name="edad"><br></td>
+                <td><input id="edad" type="text" name="edad"><br></td>
             </tr>
             <tr>
                 <td>Genero:</td>
                 <td>
-                    F:  <input type=radio name="género" value="F">
-                    M:  <input type=radio name="género" value="M">
+                    F:  <input id="f" type=radio name="género" value="F">
+                    M:  <input id="m" type=radio name="género" value="M">
                 </td>
             </tr>
             <tr>
                 <td>Nick:</td>
-                <td><input type="text" name="nick"></td>
+                <td><input id="Nick" type="text" name="nick"></td>
             </tr>
             <tr>
                 <td>Password:</td>
-                <td> <input type="text" name="pass"><br></td>
+                <td> <input id="Pass" type="text" name="pass"><br></td>
             </tr>
             <tr>
                 <td>Correo Electronico:</td>
-                <td><input type="text" name="CorreoElectronico"></td>
+                <td><input id="email" type="text" name="CorreoElectronico"></td>
             </tr>
         </table>
             
            
           
-           
-           <button id="botonregistro" style="border-radius: 47px;-moz-border-radius: 47px;-webkit-border-radius: 47px; background-color: red;color:black;" onclick="">Registrarse</button>
+           limpiar :<input type="reset" value="Borrar">
+           <button id="botonregistro" onclick="datosResgistrarUsuario()"> Registrarse</button>
           
           
         

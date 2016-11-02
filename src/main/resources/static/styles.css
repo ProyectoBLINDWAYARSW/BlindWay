@@ -1,9 +1,9 @@
-
 #titulo {
     font: oblique bold 120% cursive;
     color: crimson;
     font-family:Helvetica,Futura,Arial,Verdana,sans-serif;
     text-align: center;
+    top:400px;
     font-size: 200px;
     
 }
@@ -11,8 +11,14 @@
 #botonregistro {
     color: red;
     position:absolute;
-    top:600px;
-    left:590px;
+    top:650px;
+    left:600px;
+    font-size: 50px;
+    border-radius: 47px;
+    -moz-border-radius: 47px;
+    -webkit-border-radius: 47px; 
+    background-color: red;
+    color:black;
     
 }
 
@@ -24,4 +30,5 @@
     position:absolute;
     top:400px;
     left:540px;
+    font-size: 30px;
 }
