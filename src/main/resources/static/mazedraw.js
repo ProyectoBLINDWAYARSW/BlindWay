@@ -1,9 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 //grid width and height
 var bw = 400;
@@ -20,15 +14,16 @@ var canvas = $('<canvas/>').attr({
   height: ch
 }).appendTo('body');
 var maze = [
-  [4,6,3,5],
-  [10,9,4,12],
-  [6,7,9,12],
-  [12,8,6,3],
-  [10,3,11,1]
+  [2,5,6,5],
+  [4,10,9,12],
+  [14,7,5,12],
+  [12,12,8,12],
+  [8,10,3,9]
 ]
 var context = canvas.get(0).getContext("2d");
 
 function drawBoard() {
+	console.log("Entra a dibujar");
   var xx = 0,
     yy = 0;
   /*for (var xm = 0; xm <= bw; xm += 40) {
@@ -46,30 +41,41 @@ function drawBoard() {
     for (var j = 0; j < x; j++) {
 
       if ((maze[j][i] & 1) == 0) {
-        console.log("Entro 1 " +j +" "+i);
-        context.moveTo(0.5 + xx + p, p * (i + 1));
-        context.lineTo(0.5 + (yy*(j+1)) + p, p * (i + 1));
-        console.log(0.5 + xx + p + " x ,y "+ p * (i + 1));
-        console.log(0.5 + (yy*(j+1)) + p + " x ,y "+ p * (i + 1));
+        context.moveTo(0.5 + xx + p,(p * (i + 1) + (yy*i)));
+        context.lineTo(0.5 + (yy*(j+1)) + p,(p * (i + 1) + (yy*i)));
       } else {
-        console.log("Entro 2 " +j +" "+i);
-        context.moveTo(0.5 + xx + p, p * (i + 1));
+        context.moveTo(0.5 + xx + p, (p * (i + 1) + (yy*i)));
       }
       xx += 40;
     }
     // draw the west edge
-    /*for (var j = 0; j < x; j++) {
-        		if(j==0 && i==0)System.out.print("    ");
-        		else System.out.print((maze[j][i] & 8) == 0? "|   " : "    ");
-      	}
-      	if(i==y-1) System.out.println(" ");
-      	else System.out.println("|");*/
+    xx = 0;
+    yy = 50;
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><");
+    for (var j = 0; j < x; j++) {
+      if((maze[j][i]&8)==0 && (i!=0 || j!=0)){
+      	console.log("Entro a 1");
+        context.moveTo(0.5 + xx + p, (p + (yy*i)));
+        context.lineTo(0.5 + xx + p,(p+ (yy*(i+1))+0.5));
+        console.log(0.5 + xx + p + " x ,y "+(p + (yy*i)));
+        console.log(0.5 + xx + p+ " x ,y "+  (p+ (yy*(i+1))+0.5));
+        
+      }
+      else {
+      console.log("Entro a 2");
+        context.moveTo(0.5 + xx + p, (p + (yy*(j+1)) + 0.5));
+        console.log(0.5 + xx + p + " x ,y "+ (p + (yy*(j+1)) + 0.5));
+      }
+      xx += 40;
+  	}
+    
   }
   // draw the bottom line
-  /*for (var j = 0; j < x; j++) {
-    	System.out.print("+---");
-  }*/
-
+  context.moveTo(0.5 + p, (p + (yy*y)));
+	context.lineTo(0.5 + (x*40) + p,(p+ (yy*y)+0.5));
+  // draw the right line
+  context.moveTo(0.5 + (x*40) + p, 0.5 + p);
+	context.lineTo(0.5 + (x*40) + p,(p+ (yy*(y-1))+0.5));
   context.strokeStyle = "black";
   context.stroke();
 }
