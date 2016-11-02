@@ -9,7 +9,6 @@ var myGameArea = {
         this.canvas.width = bw;
         this.canvas.height = bh;
         this.context = this.canvas.getContext("2d");
-        document.body.
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
     },
@@ -17,6 +16,11 @@ var myGameArea = {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 };
+
+function start(){
+    myGameArea.start();
+    
+}
 
 //grid width and height
 var bw = 400;
@@ -28,7 +32,6 @@ var cw = bw + (p * 2) + 1;
 var ch = bh + (p * 2) + 1;
 var y = 6;
 var x = 7;
-myGameArea.start();
 console.log(myGameArea);
 var maze;
 var context = myGameArea.context;
@@ -95,4 +98,5 @@ function drawBoard() {
 $.get("/blindway/maze/"+x+"/"+y, function(data){
     console.log("Entro "+data);
     maze=data;
+    console.log(maze[0][0]);
 }).then(drawBoard());
