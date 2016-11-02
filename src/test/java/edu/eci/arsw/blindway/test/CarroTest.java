@@ -24,7 +24,7 @@ public class CarroTest {
             c.moverseX(-5);
             assertEquals("No se movio debidamente en la prueba CE1DeberiaMoverElCarroALaIzquierda",5, c.getX());
         }catch(BlindWayException ex){
-            System.out.println("Error en la creacion del carro test 1: " + ex.getMessage());
+            fail("Error en la creacion del carro test 1: " + ex.getMessage());
         }
     }
     @Test
@@ -34,7 +34,7 @@ public class CarroTest {
             c.moverseX(5);
             assertEquals("No se movio debidamente en la prueba CE2DeberiaMoverElCarroALaDerecha",15, c.getX());
         }catch(BlindWayException ex){
-            System.out.println("Error en la creacion del carro test 2: " + ex.getMessage());
+            fail("Error en la creacion del carro test 2: " + ex.getMessage());
         }
     }
     @Test
@@ -44,7 +44,7 @@ public class CarroTest {
             c.moverseY(-5);
             assertEquals("No se movio debidamente en la prueba CE3DeberiaMoverElCarroArriba",5, c.getY());
         }catch(BlindWayException ex){
-            System.out.println("Error en la creacion del carro test 3: " + ex.getMessage());
+            fail("Error en la creacion del carro test 3: " + ex.getMessage());
         }
     }
     @Test
@@ -54,7 +54,7 @@ public class CarroTest {
             c.moverseY(5);
             assertEquals("No se movio debidamente en la prueba CE4DeberiaMoverElCarroAbajo",15, c.getY());
         }catch(BlindWayException ex){
-            System.out.println("Error en la creacion del carro test 4: " + ex.getMessage());
+            fail("Error en la creacion del carro test 4: " + ex.getMessage());
         }
     }
     @Test

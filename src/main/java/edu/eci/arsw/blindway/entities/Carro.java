@@ -18,16 +18,16 @@ public class Carro {
     }
         
 
-    public int moverseX(int x)throws BlindWayException{
-        if(this.x+x<0) throw new BlindWayException("El carro no puede dirigirse a una posicion negativa");
+    public boolean moverseX(int x){
+        if(this.x+x<0)return false;
         this.x+=x;
-        return this.x;
+        return true;
     }
     
-    public int moverseY(int y) throws BlindWayException{
-        if(this.y+y<0) throw new BlindWayException("El carro no puede dirigirse a una posicion negativa");
+    public boolean moverseY(int y){
+        if(this.y+y<0) return false;
         this.y+=y;
-        return this.y;
+        return true;
     }
 
     public int getX() {

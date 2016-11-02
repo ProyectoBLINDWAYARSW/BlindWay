@@ -5,6 +5,7 @@
  */
 package edu.eci.arsw.blindway.controller;
 
+import edu.eci.arsw.blindway.entities.BlindWayException;
 import edu.eci.arsw.blindway.entities.Mapa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class GameController {
         return "Ok";
     }
     @RequestMapping(path = "/maze/{x}/{y}", method = RequestMethod.GET)
-    public ResponseEntity<?> getCurrentWord(@PathVariable Integer x,@PathVariable Integer y){
+    public ResponseEntity<?> getCurrentWord(@PathVariable Integer x,@PathVariable Integer y) throws BlindWayException{
         System.out.println(x+ " " +y+ " "+map);
         map.buildMaze(x,y);
         return new ResponseEntity<>(map.display(),HttpStatus.ACCEPTED);

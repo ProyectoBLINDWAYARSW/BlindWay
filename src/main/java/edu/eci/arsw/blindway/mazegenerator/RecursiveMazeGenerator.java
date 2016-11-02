@@ -37,29 +37,27 @@ public class RecursiveMazeGenerator implements MazeGenerator{
             // draw the north edge
             for (int j = 0; j < x; j++) {
                 System.out.print((maze[j][i] & 1) == 0 ? "+---" : "+   ");
-                sb.append((maze[j][i] & 1) == 0 ? "+---" : "+   ");
+                sb.append(maze[j][i]).append(",");
             }
             System.out.println("+");
-            sb.append("+\n");
+            sb.append("<br>");
             // draw the west edge
             for (int j = 0; j < x; j++) {
                 if(j==0 && i==0)System.out.print("    ");
                 else System.out.print((maze[j][i] & 8) == 0? "|   " : "    ");
-                if(j==0 && i==0)sb.append("    ");
-                else sb.append((maze[j][i] & 8) == 0? "|   " : "    ");
+                //sb.append(maze[j][i]).append(",");
             }
             if(i==y-1) System.out.println(" ");
             else System.out.println("|");
-            if(i==y-1) sb.append(" \n");
-            else sb.append("|\n");
+            //sb.append("<br>");
         }
         // draw the bottom line
         for (int j = 0; j < x; j++) {
             System.out.print("+---");
-            sb.append("+---");
+            //sb.append("+---");
         }
         System.out.println("+");
-        sb.append("+\n");
+        //sb.append("+<br>");
         System.out.println(sb);
         return sb.toString();
     }
