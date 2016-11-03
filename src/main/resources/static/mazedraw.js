@@ -223,16 +223,16 @@ function updateGameArea() {
 var moveObject = function(event) {
     myGamePiece.clear();
     if (Keys.up) {
-        myGamePiece.y-=30;
+        myGamePiece.y-=50;
     }
     else if (Keys.down) {  // both up and down does not work so check excl.
-        myGamePiece.y+=30;
+        myGamePiece.y+=50;
     }
     if (Keys.left) {
-        myGamePiece.x-=30;
+        myGamePiece.x-=40;
     }
     else if (Keys.right) {
-        myGamePiece.x+=30;
+        myGamePiece.x+=40;
     }
     myGamePiece.move();
 };
