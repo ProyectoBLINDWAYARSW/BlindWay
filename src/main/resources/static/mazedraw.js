@@ -34,10 +34,10 @@ function start(){
     $.get("/blindway/maze/"+x+"/"+y, function(data){
         myGameArea.start();
         context = myGameArea.context;
-        console.log("Entro "+data);
+        //console.log("Entro "+data);
         maze=data;
-        console.log(maze[0][0]);
-        console.log(maze);
+        //console.log(maze[0][0]);
+        //console.log(maze);
         drawBoard();
     });
    
@@ -49,8 +49,8 @@ function start(){
 
 
 function drawBoard() {
-  console.log("Entra a dibujar");
-  console.log(maze);
+  //console.log("Entra a dibujar");
+  //console.log(maze);
   if(maze!==null){
   var xx = 0,yy = 0;
   for (var i = 0; i < y; i++) {
@@ -70,20 +70,20 @@ function drawBoard() {
     // draw the west edge
     xx = 0;
     yy = 50;
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><");
+    //console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><");
     for (var j = 0; j < x; j++) {
       if((maze[j][i]&8)===0 && (i!==0 || j!==0)){
-      	console.log("Entro a 1");
+      	//console.log("Entro a 1");
         context.moveTo(0.5 + xx + p, (p + (yy*i)));
         context.lineTo(0.5 + xx + p,(p+ (yy*(i+1))+0.5));
-        console.log(0.5 + xx + p + " x ,y "+(p + (yy*i)));
-        console.log(0.5 + xx + p+ " x ,y "+  (p+ (yy*(i+1))+0.5));
+        //console.log(0.5 + xx + p + " x ,y "+(p + (yy*i)));
+        //console.log(0.5 + xx + p+ " x ,y "+  (p+ (yy*(i+1))+0.5));
         
       }
       else {
-      console.log("Entro a 2");
+      //console.log("Entro a 2");
         context.moveTo(0.5 + xx + p, (p + (yy*(j+1)) + 0.5));
-        console.log(0.5 + xx + p + " x ,y "+ (p + (yy*(j+1)) + 0.5));
+        //console.log(0.5 + xx + p + " x ,y "+ (p + (yy*(j+1)) + 0.5));
       }
       xx += 40;
     }
