@@ -1,6 +1,7 @@
 package edu.eci.arsw.blindway.entities;
 
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Usuario {
@@ -35,6 +36,10 @@ public class Usuario {
         this.contraseña = contraseña;
         this.correoElectronico = correoElectronico;
         this.conectado=false;
+        this.bloqueados=new LinkedList();
+        this.amigos=new LinkedList();
+        this.estadisticas=new LinkedList();
+        this.invitaciones=new LinkedList();
     }
     
     @Override

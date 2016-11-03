@@ -38,7 +38,7 @@ public class StubSala {
     }
     public int crearSala(Usuario u, String contraseña) throws CreacionSalaException{
         for(Sala s: salasActuales){
-            if (s.getJugador1()==u || s.getJugador2()==u){
+            if (s.getJugador1().getNickname().equals(u.getNickname()) || s.getJugador2().getNickname().equals(u.getNickname())){
                 throw new CreacionSalaException("El jugador ya se encuentra en una sala, no puede estar en otra.");
             }
         }
@@ -50,14 +50,13 @@ public class StubSala {
 
     public int crearSala(Usuario u) throws CreacionSalaException {
         for(Sala s: salasActuales){
-            if (s.getJugador1()==u || s.getJugador2()==u){
+            if (s.getJugador1().getNickname().equals(u.getNickname()) || s.getJugador2().getNickname().equals(u.getNickname())){
                 throw new CreacionSalaException("El jugador ya se encuentra en una sala, no puede estar en otra.");
             }
         }
         
-        Sala sala = new Sala(u,null, id);
+        Sala sala = new Sala(u,"", id);
         id+=1;
-        System.out.println("No falla al crear "+ id);
         salasActuales.add(sala);
         return id-1;
     }
@@ -70,27 +69,29 @@ public class StubSala {
             }
         }
         if(s!=null){
-            
             if(!s.ingresarSala(jugador2, contraseña)){
-                System.out.println("Falla al ingresar"+ id);
                 throw new CreacionSalaException("No fue posible ingresar al jugador a la sala seleccionada.");
             }
+        }
+        else{
+            throw new CreacionSalaException("La sala no fue encontrada.");
         }
     }
 
     public Sala obtenerSala(int id) throws CreacionSalaException {
-        System.out.println("Entra a obtener");
         Sala s = null;
         for(Sala sala:salasActuales){
-            System.out.println("sala id: "+ sala.getId());
             if(sala.getId()==id){
-                s=sala;
+                s=sala;           
             }
-        }
-        System.out.println("Falla al obtener sala");
+        }  
         if(s==null){
             throw new CreacionSalaException("Sala no encontrada.");
         }
         return s;
+    }
+
+    public void vaciarSalas() {
+        salasActuales.clear();
     }
 }

@@ -1,6 +1,7 @@
 package edu.eci.arsw.blindway.entities;
 
 import edu.eci.arsw.blindway.persistence.StubUsuario;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Sala {
@@ -21,11 +22,25 @@ public class Sala {
             this.jugador1 = jugador1;
             this.contraseña = contraseña;
             this.id=id;
+            this.expulsados=new LinkedList();
         }
         
         @Override
         public String toString(){
-            return this.jugador1.getNickname() + ", " + this.jugador2.getNickname() + ", " + this.contraseña;
+            String res = "";
+            if(jugador2==null && !contraseña.equals("")){
+                res=this.jugador1.getNickname() + ", null, " + this.contraseña;
+            }
+            else if(jugador2==null && contraseña.equals("")){
+                res=this.jugador1.getNickname() + ", null, null";
+            }
+            else if(jugador2!=null && contraseña.equals("")){
+                res=this.jugador1.getNickname() + ", " + this.jugador2.getNickname() + ", null";
+            }
+            else{
+                res=this.jugador1.getNickname() + ", " + this.jugador2.getNickname() + ", " + this.contraseña;
+            }
+            return res;
         }
         
 	public void invitacionGlobal() {
@@ -59,7 +74,7 @@ public class Sala {
             boolean verificacion=false;
             if(getJugador2()==null){
                 if(contraseña.equals(this.contraseña)){
-                    if(!expulsados.contains(jugador) && !jugador1.getBloqueados().contains(jugador)){
+                    if(!expulsados.contains(jugador) && !jugador1.getBloqueados().contains(jugador)){                   
                         setJugador2(jugador);
                         verificacion=true;
                     }
