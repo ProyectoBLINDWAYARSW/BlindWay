@@ -48,7 +48,7 @@ function start(){
         //console.log(maze);
         drawBoard();
         myGamePiece.update();
-        setInterval(updateGameArea(), 10);
+        setInterval(updateGameArea(), 11);
     });
    
     
@@ -94,9 +94,9 @@ function component(width, height, color, x, y) {
         }
         return crash;
     };
-    this.move = function(){
+    /*this.move = function(){
         this.clear();
-        for (var direction in Keys) {
+        /*for (var direction in Keys) {
             if (!Keys.hasOwnProperty(direction)) continue;
             if (direction === 37) {
                 this.x+=30;
@@ -110,9 +110,9 @@ function component(width, height, color, x, y) {
             if (direction === 40) {
                 this.y-=30;
             }
-        }
-        this.update();
-    };
+        }*/
+        /*this.update();
+    };*/
     this.clear = function(){
         ctx = myGameArea.context;
         ctx.fillStyle = "white";
@@ -179,7 +179,7 @@ window.onkeydown = function(e) {
     else if (kc === 38) Keys.up = true;    // so check exclusively
     else if (kc === 39) Keys.right = true;
     else if (kc === 40) Keys.down = true;
-    myGamePiece.move();
+    //myGamePiece.move();
 };
 
 window.onkeyup = function(e) {
@@ -217,23 +217,29 @@ function updateGameArea() {
     }*/
     context=myGameArea.context;
     drawBoard();
-    myGamePiece.move();
+    //myGamePiece.move();
     myGamePiece.update();
 }
 var moveObject = function(event) {
+    
     myGamePiece.clear();
-    if (Keys.up) {
+    if (event.which===38) {
         myGamePiece.y-=50;
     }
-    else if (Keys.down) {  // both up and down does not work so check excl.
+    else if (event.which===40) {  // both up and down does not work so check excl.
         myGamePiece.y+=50;
     }
-    if (Keys.left) {
+    if (event.which===37) {
         myGamePiece.x-=40;
     }
-    else if (Keys.right) {
+    else if (event.which===39) {
         myGamePiece.x+=40;
     }
-    myGamePiece.move();
+    myGamePiece.update();
+    //setTimeout(moveObject, 100);
+    
 };
-document.addEventListener('keydown', moveObject,true);
+//document.addEventListener('keydown', moveObject,true);
+$(document).ready(function(){
+    $(document).keydown(moveObject);
+});
