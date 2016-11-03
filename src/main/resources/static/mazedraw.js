@@ -48,7 +48,7 @@ function start(){
         //console.log(maze);
         drawBoard();
         myGamePiece.update();
-        setInterval(updateGameArea(), 20);
+        setInterval(updateGameArea(), 10);
     });
    
     
@@ -95,6 +95,7 @@ function component(width, height, color, x, y) {
         return crash;
     };
     this.move = function(){
+        this.clear();
         for (var direction in Keys) {
             if (!Keys.hasOwnProperty(direction)) continue;
             if (direction === 37) {
@@ -110,7 +111,13 @@ function component(width, height, color, x, y) {
                 this.y-=30;
             }
         }
+        this.update();
     };
+    this.clear = function(){
+        ctx = myGameArea.context;
+        ctx.fillStyle = "white";
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
 }
 
 
@@ -168,20 +175,15 @@ function drawBoard() {
 
 window.onkeydown = function(e) {
     var kc = e.keyCode;
-    e.preventDefault();
-    console.log("Entro a presionar"+ kc);
     if      (kc === 37) Keys.left = true;  // only one key per event
     else if (kc === 38) Keys.up = true;    // so check exclusively
     else if (kc === 39) Keys.right = true;
     else if (kc === 40) Keys.down = true;
-    
+    myGamePiece.move();
 };
 
 window.onkeyup = function(e) {
     var kc = e.keyCode;
-    e.preventDefault();
-    console.log("Entro a levantar");
-    myGamePiece.move();
     if      (kc === 37) Keys.left = false;
     else if (kc === 38) Keys.up = false;
     else if (kc === 39) Keys.right = false;
@@ -213,8 +215,25 @@ function updateGameArea() {
         myObstacles[i].x += -1;
         myObstacles[i].update();
     }*/
-    //context=myGameArea.context;
+    context=myGameArea.context;
     drawBoard();
     myGamePiece.move();
     myGamePiece.update();
 }
+var moveObject = function(event) {
+    myGamePiece.clear();
+    if (Keys.up) {
+        myGamePiece.y-=30;
+    }
+    else if (Keys.down) {  // both up and down does not work so check excl.
+        myGamePiece.y+=30;
+    }
+    if (Keys.left) {
+        myGamePiece.x-=30;
+    }
+    else if (Keys.right) {
+        myGamePiece.x+=30;
+    }
+    myGamePiece.move();
+};
+document.addEventListener('keydown', moveObject,true);
