@@ -13,9 +13,12 @@ import java.util.ArrayList;
  * @author 2107262
  */
 public class StubUsuario {
+    
     private static StubUsuario instance;
-    private static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-    private static ArrayList<Usuario> conectados = new ArrayList<Usuario>();
+    
+    private static ArrayList<Usuario> usuarios = new ArrayList();
+    
+    private static ArrayList<Usuario> conectados = new ArrayList();
 
     private StubUsuario() {
         
@@ -35,36 +38,40 @@ public class StubUsuario {
         int contNick=0;
         int contCorreo=0;
         boolean contra =true;
-        for(Usuario u:usuarios){
-            if(u.getNickname().equals(nickname)){
-                contNick=1;
-            }
-            if(u.getCorreoElectronico().equals(correo)){
-                contCorreo=1;
-            }
-        }
         if(contraseña.length()<6){
-            contra = false;
+                contra = false;
         }
-        if(contNick==0 && contCorreo==0 && contra){
-            Usuario u = new Usuario(nombre,edad,genero,nickname,contraseña,correo);
-            usuarios.add(u);
+        synchronized(instance){
+            for(Usuario u:usuarios){
+                if(u.getNickname().equals(nickname)){
+                    contNick=1;
+                }
+                if(u.getCorreoElectronico().equals(correo)){
+                    contCorreo=1;
+                }
+            }
+            if(contNick==0 && contCorreo==0 && contra){
+                Usuario u = new Usuario(nombre,edad,genero,nickname,contraseña,correo);
+                usuarios.add(u);
+            }
+            else if(contNick==1 && contCorreo==0){
+                throw new RegistroUsuarioException("Nickname ya se encuentra en uso.");
+            }
+            else if (contCorreo==1 && contNick==0){
+                throw new RegistroUsuarioException("Correo ya se encuentra en uso.");
+            }
+            else if (contCorreo==1 && contNick==1){
+                throw new RegistroUsuarioException("Correo y Nickname ya se encuentran en uso.");
+            }
+            else if (!contra){
+                throw new RegistroUsuarioException("La contraseña debe de tener minimo 6 caracteres.");
+            }
+            else{           
+                throw new RegistroUsuarioException("Error al crear un usuario.");
+            }
         }
-        else if(contNick==1 && contCorreo==0){
-            throw new RegistroUsuarioException("Nickname ya se encuentra en uso.");
-        }
-        else if (contCorreo==1 && contNick==0){
-            throw new RegistroUsuarioException("Correo ya se encuentra en uso.");
-        }
-        else if (contCorreo==1 && contNick==1){
-            throw new RegistroUsuarioException("Correo y Nickname ya se encuentran en uso.");
-        }
-        else if (!contra){
-            throw new RegistroUsuarioException("La contraseña debe de tener minimo 6 caracteres.");
-        }
-        else{           
-            throw new RegistroUsuarioException("Error al crear un usuario.");
-        }
+        
+        
     }
 
     public Usuario cargarUsuarioPorNick(String nick) throws RegistroUsuarioException {

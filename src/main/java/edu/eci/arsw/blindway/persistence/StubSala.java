@@ -32,9 +32,9 @@ public class StubSala {
         return instance;
     }
     public void eliminarSala(Sala sala){
-        if(salasActuales.contains(sala)){
-            salasActuales.remove(sala);
-        }
+            if(salasActuales.contains(sala)){
+                salasActuales.remove(sala);
+            }
     }
     public int crearSala(Usuario u, String contraseña) throws CreacionSalaException{
         for(Sala s: salasActuales){
@@ -49,12 +49,13 @@ public class StubSala {
     }
 
     public int crearSala(Usuario u) throws CreacionSalaException {
-        for(Sala s: salasActuales){
-            if (s.getJugador1().getNickname().equals(u.getNickname()) || s.getJugador2().getNickname().equals(u.getNickname())){
-                throw new CreacionSalaException("El jugador ya se encuentra en una sala, no puede estar en otra.");
+        synchronized(instance){
+            for(Sala s: salasActuales){
+                if (s.getJugador1().getNickname().equals(u.getNickname()) || s.getJugador2().getNickname().equals(u.getNickname())){
+                    throw new CreacionSalaException("El jugador ya se encuentra en una sala, no puede estar en otra.");
+                }
             }
         }
-        
         Sala sala = new Sala(u,"", id);
         id+=1;
         salasActuales.add(sala);
@@ -69,9 +70,11 @@ public class StubSala {
             }
         }
         if(s!=null){
-            if(!s.ingresarSala(jugador2, contraseña)){
-                throw new CreacionSalaException("No fue posible ingresar al jugador a la sala seleccionada.");
-            }
+            synchronized(instance){
+                if(!s.ingresarSala(jugador2, contraseña)){
+                    throw new CreacionSalaException("No fue posible ingresar al jugador a la sala seleccionada.");
+                }
+            }   
         }
         else{
             throw new CreacionSalaException("La sala no fue encontrada.");
