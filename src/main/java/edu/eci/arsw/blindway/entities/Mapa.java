@@ -48,9 +48,6 @@ public class Mapa {
         kam.build(n,m);
         celdas=kam.getMaze();
     }
-    public String display(){
-        return kam.display();
-    }
     public boolean moveDown(){
         if(carro.getY()+1>=m || (celdas[carro.getX()][carro.getY()+1] & 1) ==0) return false;
         return carro.moverseY(1);

@@ -30,22 +30,6 @@ public class RecursiveMazeGenerator implements MazeGenerator{
       
     }
     
-
-    public String display() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        for (int i = 0; i < y; i++) {
-            sb.append("[");
-            sb.append(maze[0][i]);
-            for (int j = 1; j < x; j++) {   
-                sb.append(",").append(maze[j][i]);
-            }
-            if(i==y-1)sb.append("]");
-            else sb.append("],");
-        }
-        sb.append("]");
-        return sb.toString();
-    }
     private void generateMaze(int cx, int cy) {
         DIR[] dirs = DIR.values();
         Collections.shuffle(Arrays.asList(dirs));

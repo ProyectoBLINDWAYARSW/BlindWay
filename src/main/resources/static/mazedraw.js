@@ -1,3 +1,14 @@
+//grid width and height
+var bw = 400;
+var bh = 400;
+//padding around grid
+var p = 10;
+//size of canvas
+var cw = bw + (p * 2) + 1;
+var ch = bh + (p * 2) + 1;
+var y = 6;
+var x = 7;
+
 
 var myGamePiece;
 var myObstacles = [];
@@ -16,39 +27,32 @@ var myGameArea = {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 };
-
+var maze=null;
+var context =null; 
 function start(){
-    myGameArea.start();
+    
+    $.get("/blindway/maze/"+x+"/"+y, function(data){
+        myGameArea.start();
+        context = myGameArea.context;
+        console.log("Entro "+data);
+        maze=data;
+        console.log(maze[0][0]);
+        console.log(maze);
+        drawBoard();
+    });
+   
     
 }
 
-//grid width and height
-var bw = 400;
-var bh = 400;
-//padding around grid
-var p = 10;
-//size of canvas
-var cw = bw + (p * 2) + 1;
-var ch = bh + (p * 2) + 1;
-var y = 6;
-var x = 7;
-console.log(myGameArea);
-var maze;
-var context = myGameArea.context;
+
+
 
 
 function drawBoard() {
-	console.log("Entra a dibujar");
-  var xx = 0,
-    yy = 0;
-  /*for (var xm = 0; xm <= bw; xm += 40) {
-      context.moveTo(p, 0.5 + xm + p);
-      context.lineTo(bw + p, 0.5 + xm + p);
-  }
-  for (var xm = 0; xm <= bh; xm += 40) {
-      context.moveTo(0.5 + xm + p,p);
-      context.lineTo(0.5 + xm + p,bw + p);
-  }*/
+  console.log("Entra a dibujar");
+  console.log(maze);
+  if(maze!==null){
+  var xx = 0,yy = 0;
   for (var i = 0; i < y; i++) {
     // draw the north edge
     xx = 0;
@@ -82,21 +86,16 @@ function drawBoard() {
         console.log(0.5 + xx + p + " x ,y "+ (p + (yy*(j+1)) + 0.5));
       }
       xx += 40;
-  	}
+    }
     
   }
   // draw the bottom line
   context.moveTo(0.5 + p, (p + (yy*y)));
-	context.lineTo(0.5 + (x*40) + p,(p+ (yy*y)+0.5));
+  context.lineTo(0.5 + (x*40) + p,(p+ (yy*y)+0.5));
   // draw the right line
   context.moveTo(0.5 + (x*40) + p, 0.5 + p);
-	context.lineTo(0.5 + (x*40) + p,(p+ (yy*(y-1))+0.5));
+  context.lineTo(0.5 + (x*40) + p,(p+ (yy*(y-1))+0.5));
   context.strokeStyle = "black";
   context.stroke();
-}
+}}
 
-$.get("/blindway/maze/"+x+"/"+y, function(data){
-    console.log("Entro "+data);
-    maze=data;
-    console.log(maze[0][0]);
-}).then(drawBoard());

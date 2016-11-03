@@ -12,5 +12,4 @@ package edu.eci.arsw.blindway.mazegenerator;
 public interface MazeGenerator {
     public int[][] getMaze();
     public void build(int x,int y);
-    public String display();
 }

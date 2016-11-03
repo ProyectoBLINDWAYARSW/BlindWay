@@ -80,8 +80,6 @@ public class MapaTest {
             Mapa map = new Mapa();
             map.setKam(new RecursiveMazeGenerator());
             map.buildMaze(5, 4);
-            map.display();
-            
             int[][] maze = map.getCeldas();
             int x =map.getCarro().getX();
             int y =map.getCarro().getY();
