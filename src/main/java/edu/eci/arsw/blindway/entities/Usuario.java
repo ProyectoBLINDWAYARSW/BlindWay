@@ -23,6 +23,8 @@ public class Usuario {
         
     private List<Integer> estadisticas;
     
+    private List<Invitacion> invitaciones;
+    
     private boolean conectado;
     
     public Usuario(String nombre, int edad, String genero, String nickname, String contraseña, String correoElectronico) {
@@ -180,5 +182,18 @@ public class Usuario {
         this.conectado = conectado;
     }
     
-
+    public void bloquearUsuario(Usuario bloquear) {
+        this.bloqueados.add(bloquear);
+    }
+    
+    public void desbloquearUsuario(Usuario bloquear) {
+        if(this.bloqueados.contains(bloquear)){
+            this.bloqueados.remove(bloquear);
+        }
+    }
+    public void añadirInvitacion(Invitacion i){
+        this.invitaciones.add(i);
+        //Mostrar invitación
+    }
+    
 }

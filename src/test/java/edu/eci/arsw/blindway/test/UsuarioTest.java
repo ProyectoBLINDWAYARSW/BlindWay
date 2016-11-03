@@ -42,10 +42,11 @@ public class UsuarioTest {
             StubUsuario.getInstance().registroUsuario("Leonardo Herrera",20,"Masculino","Saiga","contraseña123","leonardo.ft3@gmail.com");
             StubUsuario.getInstance().registroUsuario("Santiago Prado",16,"Masculino","Saiga","contraseña123","algo@gmail.com");
             StubUsuario.getInstance().vaciarUsuarios();
-            assertEquals("Error en el registro de un usuario con nickname repetido, permitio el registro (2)",true,false);
+            fail("Error en el registro de un usuario con nickname repetido, permitio el registro (2)");
         }catch(Exception ex){
-            System.out.println("Error en la creacion de usuario test 2: " + ex.getMessage());
             StubUsuario.getInstance().vaciarUsuarios();
+            assertEquals("Error al permitir crear un usuario con un nickname encontrado en la base de datos","Nickname ya se encuentra en uso.",ex.getMessage());
+            
         }
         
     }
@@ -57,10 +58,10 @@ public class UsuarioTest {
             StubUsuario.getInstance().registroUsuario("Leonardo Herrera",20,"Masculino","Saiga","contraseña123","leonardo.ft3@gmail.com");
             StubUsuario.getInstance().registroUsuario("Santiago Prado",16,"Masculino","Leo","contraseña123","leonardo.ft3@gmail.com");
             StubUsuario.getInstance().vaciarUsuarios();
-            assertEquals("Error en el registro de usuario con nickname único pero con correo repetido (3)",true,false);
+            fail("Error en el registro de usuario con nickname único pero con correo repetido (3)");
         }catch(Exception ex){
-            System.out.println("Error en la creacion de usuario test 3: " + ex.getMessage());
             StubUsuario.getInstance().vaciarUsuarios();
+            assertEquals("Error al permitir crear un usuario con un nickname no encontrado en la base de datos pero con un correo repetido ","Correo ya se encuentra en uso.",ex.getMessage());
         }
         
     }
@@ -72,10 +73,10 @@ public class UsuarioTest {
             StubUsuario.getInstance().registroUsuario("Leonardo Herrera",20,"Masculino","Saiga","contraseña123","leonardo.ft3@gmail.com");
             StubUsuario.getInstance().registroUsuario("Santiago Prado",16,"Masculino","Saiga","contraseña123","leonardo.ft3@gmail.com");
             StubUsuario.getInstance().vaciarUsuarios();
-            assertEquals("Error en el registro de usuario con nickname repetido y con correo repetido (4)",true,false);
+            fail("Error en el registro de usuario con nickname repetido y con correo repetido (4)");
         }catch(Exception ex){
-            System.out.println("Error en la creacion de usuario test 4: " + ex.getMessage());
             StubUsuario.getInstance().vaciarUsuarios();
+            assertEquals("Error al crear un usuario con nickname encontrado en la base de datos y correo repetido","Correo y Nickname ya se encuentran en uso.",ex.getMessage());
         }
 
     }
@@ -86,10 +87,10 @@ public class UsuarioTest {
         try{
             StubUsuario.getInstance().registroUsuario("Leonardo Herrera",20,"Masculino","Saiga","123","leonardo.ft3@gmail.com");
             StubUsuario.getInstance().vaciarUsuarios();
-            assertEquals("Error en el registro de usuario con contraseña de longitud menor a 6 (5)",true,false);
+            fail("Error en el registro de usuario con contraseña de longitud menor a 6 (5)");
         }catch(Exception ex){
-            System.out.println("Error en la creacion de usuario test 5: " + ex.getMessage());
             StubUsuario.getInstance().vaciarUsuarios();
+            assertEquals("Error quintoTest, al permitir crear un usuario con una contraseña menor a 6 caracteres","La contraseña debe de tener minimo 6 caracteres.",ex.getMessage());                            
         }
     }
     //1. Consultar alguno de los usuarios ya existentes en la base de datos
@@ -101,8 +102,8 @@ public class UsuarioTest {
             StubUsuario.getInstance().vaciarUsuarios();
             assertEquals("Error en la consulta de un usuario existente (1)","Usuario Prueba, Admin, admin@gmail.com",u);
         }catch(Exception ex){
-            System.out.println("Error en la consulta de usuario test 1 : " + ex.getMessage());
             StubUsuario.getInstance().vaciarUsuarios();
+            System.out.println("Error en la consulta de usuario test 1 : " + ex.getMessage());   
         }       
     }
     //2. Consultar algun usuario no existentes en la base de datos
@@ -112,10 +113,10 @@ public class UsuarioTest {
             StubUsuario.getInstance().cargarUsuariosEstaticos();
             Usuario prueba = StubUsuario.getInstance().cargarUsuarioPorNick("Admon"); 
             StubUsuario.getInstance().vaciarUsuarios();
-            assertEquals("Error en la consulta de un usuario no existente (2)","Usuario Prueba, Admin, admin@gmail.com",prueba.toString());
+            fail("Error en la consulta de un usuario no existente (2)");
         }catch(Exception ex){
-            System.out.println("Error en la consulta de usuario test 2: " + ex.getMessage());
             StubUsuario.getInstance().vaciarUsuarios();
+            assertEquals("Error al consultar un usuario no existentes en la base de datos","Usuario con nick pedido no existe.",ex.getMessage());    
         }
     }
 }

@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Sala {
 
+        private int id;
+    
 	private Usuario jugador1;
 
 	private Usuario jugador2;
@@ -13,34 +15,67 @@ public class Sala {
 
 	private String contraseña;
         
-        private StubUsuario data = StubUsuario.getInstance();
-
+        private StubUsuario dataUsuario = StubUsuario.getInstance();       
+        
+        public Sala(Usuario jugador1, String contraseña, int id) {
+            this.jugador1 = jugador1;
+            this.contraseña = contraseña;
+            this.id=id;
+        }
+        
+        @Override
+        public String toString(){
+            return this.jugador1.getNickname() + ", " + this.jugador2.getNickname() + ", " + this.contraseña;
+        }
+        
 	public void invitacionGlobal() {
-
+                for(Usuario u:dataUsuario.usuariosConectados()){
+                    Invitacion i = new Invitacion(jugador1,u,this);
+                    //enviar invitación
+                }
 	}
 
 	public void InvitacionAmigos() {
                 for(Usuario u:jugador1.getAmigos()){
                     //A cada amigo conectado que tenga el usuario 1(dueño de la sala se le envia una invitación)
                     if(u.isConectado()){
-                        
+                        Invitacion i = new Invitacion(jugador1,u,this);
+                        //enviar invitación
                     }
                 }
 	}
         
         public void InvitacionAmigo(Usuario amigo) {
-
+                if(amigo.isConectado()){
+                    Invitacion i = new Invitacion(jugador1,amigo,this);
+                    //enviar invitación
+                }
+                else{
+                    //Mensajes.mostrarMensaje("El usuario no se encuentra conectado.", "Error al invitar a " + amigo.getNickname() + ":");
+                }
 	}
         
-        public boolean ingresarSala(Usuario jugador){
+        public boolean ingresarSala(Usuario jugador, String contraseña){
             boolean verificacion=false;
             if(getJugador2()==null){
-                if(!expulsados.contains(jugador) && !jugador1.getBloqueados().contains(jugador)){
-                    setJugador2(jugador);
-                    verificacion=true;
+                if(contraseña.equals(this.contraseña)){
+                    if(!expulsados.contains(jugador) && !jugador1.getBloqueados().contains(jugador)){
+                        setJugador2(jugador);
+                        verificacion=true;
+                    }
                 }
+                else{
+                    //Mensajes.mostrarMensaje("Contraseña incorrecta.", "Error al ingresar a la sala:");
+                }                
             }
             return verificacion;
+        }
+        public void expulsarJugadorSala(){
+            if(jugador2!=null){
+                //Mensajes.mostrarMensaje("El jugador "+jugador2.getNickname()+" a sido expulsado de la sala.", "Expulsion de jugador:");
+                expulsados.add(jugador2);
+                jugador2=null;
+            }
         }
 
     /**
@@ -97,6 +132,20 @@ public class Sala {
      */
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

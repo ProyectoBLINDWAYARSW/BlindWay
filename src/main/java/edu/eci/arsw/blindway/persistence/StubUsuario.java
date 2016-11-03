@@ -13,39 +13,51 @@ import java.util.ArrayList;
  * @author 2107262
  */
 public class StubUsuario {
-    public static StubUsuario instance;
-    public static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-    public static ArrayList<Usuario> conectados = new ArrayList<Usuario>();
+    private static StubUsuario instance;
+    private static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+    private static ArrayList<Usuario> conectados = new ArrayList<Usuario>();
+
+    private StubUsuario() {
+        
+    }
+    
     public static StubUsuario getInstance() {
         if(instance==null){
             instance = new StubUsuario();
         }
         return instance;
     }
+    public ArrayList<Usuario> usuariosConectados(){
+        return conectados;
+    }
 
     public void registroUsuario(String nombre, int edad, String genero, String nickname, String contraseña, String correo) throws RegistroUsuarioException {
-        int cont=0;
+        int contNick=0;
+        int contCorreo=0;
         boolean contra =true;
         for(Usuario u:usuarios){
             if(u.getNickname().equals(nickname)){
-                cont=1;
+                contNick=1;
             }
-            else if(u.getCorreoElectronico().equals(correo)){
-                cont=2;
+            if(u.getCorreoElectronico().equals(correo)){
+                contCorreo=1;
             }
         }
         if(contraseña.length()<6){
             contra = false;
         }
-        if(cont==0 && contra){
+        if(contNick==0 && contCorreo==0 && contra){
             Usuario u = new Usuario(nombre,edad,genero,nickname,contraseña,correo);
             usuarios.add(u);
         }
-        else if(cont==1){
+        else if(contNick==1 && contCorreo==0){
             throw new RegistroUsuarioException("Nickname ya se encuentra en uso.");
         }
-        else if (cont==2){
+        else if (contCorreo==1 && contNick==0){
             throw new RegistroUsuarioException("Correo ya se encuentra en uso.");
+        }
+        else if (contCorreo==1 && contNick==1){
+            throw new RegistroUsuarioException("Correo y Nickname ya se encuentran en uso.");
         }
         else if (!contra){
             throw new RegistroUsuarioException("La contraseña debe de tener minimo 6 caracteres.");
@@ -75,8 +87,4 @@ public class StubUsuario {
         Usuario u = new Usuario("Usuario Prueba",20,"Masculino","Admin","admin123","admin@gmail.com");
         usuarios.add(u);   
     }
-
-
-
-    
 }
