@@ -145,5 +145,23 @@ public class SalasTest {
             assertEquals("Error al dejar ingresar a una sala inexistente(6)","La sala no fue encontrada.",ex.getMessage());
             
         }
+    } 
+    //7. No permitir a un usuario crear más de una sala
+    @Test
+    public void septimoTest(){
+        try{
+            StubUsuario.getInstance().registroUsuario("Leonardo Herrera",20,"Masculino","Saiga","contraseña123","leonardo.ft3@gmail.com");
+            Usuario jugador1=StubUsuario.getInstance().cargarUsuarioPorNick("Saiga");
+            int id = StubSala.getInstance().crearSala(jugador1,"contraseña");
+            int id2 = StubSala.getInstance().crearSala(jugador1,"contraseña");
+            StubUsuario.getInstance().vaciarUsuarios();
+            StubSala.getInstance().vaciarSalas();
+            fail("Error, permitio a un usuario crear mas de 1 sala (7)");
+        }catch(Exception ex){
+            StubUsuario.getInstance().vaciarUsuarios();
+            StubSala.getInstance().vaciarSalas();
+            assertEquals("Error al crear mas de 1 sala un usuario(7)","El jugador ya se encuentra en una sala, no puede estar en otra.",ex.getMessage());
+            
+        }
     }
 }
