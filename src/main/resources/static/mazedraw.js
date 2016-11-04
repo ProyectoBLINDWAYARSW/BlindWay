@@ -8,18 +8,21 @@ var cw = bw + (p * 2) + 1;
 var ch = bh + (p * 2) + 1;
 var y = 6;
 var x = 7;
-
-
+var px=0;
+var py=0;
+var moveOk=true;
+var maze=null;
 var myGamePiece=null;
 var myObstacles = [];
 var myScore;
+var carro=null;
 var Keys = {
         up: false,
         down: false,
         left: false,
         right: false
     };
-
+var stompClient = null;
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
@@ -34,8 +37,31 @@ var myGameArea = {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 };
-var maze=null;
 
+var moveObject = function(event) {
+    
+    myGamePiece.clear();
+    check(event);
+    if (event.which===38 && moveOk) {
+        py-=1;
+        myGamePiece.y-=50;
+    }
+    else if (event.which===40 && moveOk) {  // both up and down does not work so check excl.
+        py+=1;
+        myGamePiece.y+=50;
+    }
+    if (event.which===37 && moveOk) {
+        px-=1;
+        myGamePiece.x-=40;
+    }
+    else if (event.which===39 && moveOk) {
+        px+=1;
+        myGamePiece.x+=40;
+    }
+    myGamePiece.update();
+    //setTimeout(moveObject, 100);
+    
+};
 function start(){
     console.log("Entro a dibujar 1asdasdasdasdasda");
     $.get("/blindway/maze/"+x+"/"+y, function(data){
@@ -117,7 +143,7 @@ function component(width, height, color, x, y) {
         ctx = myGameArea.context;
         ctx.fillStyle = "white";
         ctx.fillRect(this.x, this.y, this.width, this.height);
-    }
+    };
 }
 
 
@@ -173,24 +199,6 @@ function drawBoard() {
   myGameArea.context.stroke();
 }}
 
-window.onkeydown = function(e) {
-    var kc = e.keyCode;
-    if      (kc === 37) Keys.left = true;  // only one key per event
-    else if (kc === 38) Keys.up = true;    // so check exclusively
-    else if (kc === 39) Keys.right = true;
-    else if (kc === 40) Keys.down = true;
-    //myGamePiece.move();
-};
-
-window.onkeyup = function(e) {
-    var kc = e.keyCode;
-    if      (kc === 37) Keys.left = false;
-    else if (kc === 38) Keys.up = false;
-    else if (kc === 39) Keys.right = false;
-    else if (kc === 40) Keys.down = false;
-};
-
-
 function updateGameArea() {
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < myObstacles.length; i += 1) {
@@ -220,26 +228,84 @@ function updateGameArea() {
     //myGamePiece.move();
     myGamePiece.update();
 }
-var moveObject = function(event) {
-    
-    myGamePiece.clear();
+
+function check(event){
+    carro = new Carro(px,py,"Up");
+    console.log(carro);
     if (event.which===38) {
-        myGamePiece.y-=50;
+        carro = new Carro(px,py,"Up");
+        $.post("/blindway/maze/"+x+"/"+y+"/w",carro,function (result) {
+                console.log(result);
+                moveOk=result;
+        });
     }
-    else if (event.which===40) {  // both up and down does not work so check excl.
-        myGamePiece.y+=50;
+    else if (event.which===40) {
+        carro = new Carro(px,py,"Down");
+        $.ajax({
+            type: "POST",
+            url: "/blindway/maze/"+x+"/"+y+"/w",
+            data: carro,
+            success: function (result) {
+                console.log(result);
+                 moveOk=result;
+            }
+       });
     }
     if (event.which===37) {
-        myGamePiece.x-=40;
+        carro = new Carro(px,py,"Left");
+        $.ajax({
+            type: "POST",
+            url: "/blindway/maze/"+x+"/"+y+"/w",
+            data: carro,
+            success: function (result) {
+                console.log(result);
+                 moveOk=result;
+            }
+       });
     }
     else if (event.which===39) {
-        myGamePiece.x+=40;
+        carro = new Carro(px,py,"Right");
+        $.ajax({
+            type: "POST",
+            url: "/blindway/maze/"+x+"/"+y+"/w",
+            data: carro,
+            success: function (result) {
+                console.log(result);
+                 moveOk=result;
+            }
+       });
     }
-    myGamePiece.update();
-    //setTimeout(moveObject, 100);
-    
-};
+}
+
+
 //document.addEventListener('keydown', moveObject,true);
 $(document).ready(function(){
+    connect();
     $(document).keydown(moveObject);
 });
+
+
+
+function sendRequest() {
+    
+}
+function connect() {
+    var socket = new SockJS('/stompendpoint');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        
+        
+        stompClient.subscribe('/topic/move', function () {
+            //subscriber action
+            
+        });
+        
+    });
+}
+function disconnect() {
+    if (stompClient != null) {
+        stompClient.disconnect();
+    }
+    setConnected(false);
+    console.log("Disconnected");
+}

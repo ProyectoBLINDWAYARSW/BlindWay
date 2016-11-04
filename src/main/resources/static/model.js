@@ -21,3 +21,13 @@ function Usuario(nombre, edad, genero,nick, pass, correo){
     this.pass = pass;
     this.correo = correo;    
 }
+
+function Carro(x,y,direccion){
+    this.x=x;
+    this.y=y;
+    this.direccion=direccion;
+}
+$(document).ready(
+        function () {
+        }
+);

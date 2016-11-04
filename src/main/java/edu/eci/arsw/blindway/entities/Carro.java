@@ -45,7 +45,20 @@ public class Carro {
     public void setY(int y) {
         this.y = y;
     }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    @Override
+    public String toString() {
+        return x+" "+y+" "+direccion;
+    }
     
-	
+    
 
 }
