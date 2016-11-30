@@ -17,19 +17,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <html>
     <head>
-        <title>BlindWay</title>
+        <title id="titulo" >BLIND WAY</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script type="text/javascript" src="RegistrarUsuario.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="/webjars/jquery/jquery.min.js"></script>
         <script src="/webjars/sockjs-client/sockjs.min.js"></script>
         <script src="/webjars/stomp-websocket/stomp.min.js"></script>
         <script src="/login.js"></script>
-
     </head>
-
-
-    
-    <body>
-        <button onclick="log()">login</button>
+    <body background="fondo.jpg" align="center">
+        <div id="titulo1">Blind Way</div>
+        <button id="botonregistro" onclick="reg()">Registrarse</button>
+        <button id="botonlog" onclick="log()">Login</button>
     </body>
 </html>

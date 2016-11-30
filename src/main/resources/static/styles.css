@@ -7,9 +7,44 @@
     font-size: 200px;
     
 }
+#titulo1 {
+    font: oblique bold 120% cursive;
+    color: #b10f01;
+    font-family:Helvetica,Futura,Arial,Verdana,sans-serif;
+    text-align: center;
+    top:400px;
+    font-size: 200px;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
 
 #botonregistro {
-    color: red;
+    color: #b01001;
+    position:absolute;
+    top:470px;
+    left:700px;
+    font-size: 50px;
+    border-radius: 47px;
+    -moz-border-radius: 47px;
+    -webkit-border-radius: 47px; 
+    background-color: #b10f01;
+    color:black;
+    
+}
+#botonlog {
+    color: #b01001;
+    position:absolute;
+    top:400px;
+    left:750px;
+    font-size: 50px;
+    border-radius: 47px;
+    -moz-border-radius: 47px;
+    -webkit-border-radius: 47px; 
+    background-color: #b10f01;
+    color:black;
+    
+}
+#botonagregar {
+    color: #b01001;
     position:absolute;
     top:650px;
     left:600px;
@@ -17,7 +52,7 @@
     border-radius: 47px;
     -moz-border-radius: 47px;
     -webkit-border-radius: 47px; 
-    background-color: red;
+    background-color: #b10f01;
     color:black;
     
 }
