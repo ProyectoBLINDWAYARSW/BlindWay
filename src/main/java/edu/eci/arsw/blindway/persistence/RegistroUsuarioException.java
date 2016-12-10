@@ -9,7 +9,7 @@ package edu.eci.arsw.blindway.persistence;
  *
  * @author 2107262
  */
-class RegistroUsuarioException extends Exception {
+public class RegistroUsuarioException extends Exception {
 
     public RegistroUsuarioException(String message) {
         super(message);

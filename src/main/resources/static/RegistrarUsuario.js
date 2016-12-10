@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+var stompClient = null;
 registrados = [];
 
 function datosResgistrarUsuario(){
-   var datos=Array();
+    //var datos=Array();
     var nombre = $("#nombre").val();
     var edad = $("#edad").val();
     var f = $("#f").val();
@@ -19,17 +19,28 @@ function datosResgistrarUsuario(){
     
     if($("#f").is(':checked')) {  
          genero = "f";
-        } else {  
+        } 
+    else {  
          genero = "m";
         }  
-    datos["nombre"]=nombre;
-    datos["edad"]=edad;
-    datos["genero"]= genero;
-    datos["nick"]=nick;
-    datos["password"]= password; 
-    datos["correoElectronico"]= correoElectronico;
+    //datos["nombre"]=nombre;
+    //datos["edad"]=edad;
+    //datos["genero"]= genero;
+    //datos["nick"]=nick;
+    //datos["password"]= password; 
+    //datos["correoElectronico"]= correoElectronico;
     
     //datos[]=(f=="")?"m":"f";
-    registrados.push(datos);
+    //registrados.push(datos);
+    stompClient.send("/app/usuario", {}, nombre+','+edad+','+genero+','+nick+','+password+','+correoElectronico);
+}
+function connect() {
+    var socket = new SockJS('/stompendpoint');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        
+        console.log('Connected: ' + frame);
+
+    });
 }
 
