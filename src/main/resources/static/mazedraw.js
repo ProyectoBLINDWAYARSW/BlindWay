@@ -16,6 +16,7 @@ var myGamePiece=null;
 var myObstacles = [];
 var myScore;
 var carro=null;
+var gameid;
 var Keys = {
         up: false,
         down: false,
@@ -41,30 +42,15 @@ var myGameArea = {
 var moveObject = function(event) {
     
     myGamePiece.clear();
-    check(event);
-    if (event.which===38 && moveOk) {
-        py-=1;
-        myGamePiece.y-=50;
-    }
-    else if (event.which===40 && moveOk) {  // both up and down does not work so check excl.
-        py+=1;
-        myGamePiece.y+=50;
-    }
-    if (event.which===37 && moveOk) {
-        px-=1;
-        myGamePiece.x-=40;
-    }
-    else if (event.which===39 && moveOk) {
-        px+=1;
-        myGamePiece.x+=40;
-    }
-    myGamePiece.update();
+    check(event)
+    
     //setTimeout(moveObject, 100);
     
 };
 function start(){
     console.log("Entro a dibujar 1asdasdasdasdasda");
-    $.get("/blindway/maze/"+x+"/"+y, function(data){
+    gameid=1;
+    $.get("/blindway/maze/"+gameid+"/"+x+"/"+y, function(data){
         myGameArea.start();
         myGamePiece = new component(30, 40, "red", 15, 15);
         myGameArea.context;
@@ -233,47 +219,17 @@ function check(event){
     carro = new Carro(px,py,"Up");
     console.log(carro);
     if (event.which===38) {
-        carro = new Carro(px,py,"Up");
-        $.post("/blindway/maze/"+x+"/"+y+"/w",carro,function (result) {
-                console.log(result);
-                moveOk=result;
-        });
+        stompClient.send("/app/move."+gameid, {}, "Up");
     }
     else if (event.which===40) {
-        carro = new Carro(px,py,"Down");
-        $.ajax({
-            type: "POST",
-            url: "/blindway/maze/"+x+"/"+y+"/w",
-            data: carro,
-            success: function (result) {
-                console.log(result);
-                 moveOk=result;
-            }
-       });
+        stompClient.send("/app/move."+gameid, {}, "Down");
+        
     }
     if (event.which===37) {
-        carro = new Carro(px,py,"Left");
-        $.ajax({
-            type: "POST",
-            url: "/blindway/maze/"+x+"/"+y+"/w",
-            data: carro,
-            success: function (result) {
-                console.log(result);
-                 moveOk=result;
-            }
-       });
+        stompClient.send("/app/move."+gameid, {}, "Left");
     }
     else if (event.which===39) {
-        carro = new Carro(px,py,"Right");
-        $.ajax({
-            type: "POST",
-            url: "/blindway/maze/"+x+"/"+y+"/w",
-            data: carro,
-            success: function (result) {
-                console.log(result);
-                 moveOk=result;
-            }
-       });
+        stompClient.send("/app/move."+gameid, {}, "Right");
     }
 }
 
@@ -295,9 +251,29 @@ function connect() {
     stompClient.connect({}, function (frame) {
         
         
-        stompClient.subscribe('/topic/move', function () {
-            //subscriber action
-            
+        stompClient.subscribe('/topic/move.'+gameid, function (data) {
+            var arr =data.body.split(" "); 
+            moveOk=arr[1]==='true';
+            var event = arr[0];
+            console.log(moveOk);
+            console.log(typeof moveOk);
+            if (event==="Up" && moveOk) {
+                py-=1;
+                myGamePiece.y-=50;
+            }
+            else if (event==="Down" && moveOk) {  // both up and down does not work so check excl.
+                py+=1;
+                myGamePiece.y+=50;
+            }
+            if (event==="Left" && moveOk) {
+                px-=1;
+                myGamePiece.x-=40;
+            }
+            else if (event==="Right" && moveOk) {
+                px+=1;
+                myGamePiece.x+=40;
+            }
+            myGamePiece.update();
         });
         
     });

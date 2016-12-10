@@ -5,6 +5,7 @@
  */
 package edu.eci.arsw.blindway.persistence;
 
+import edu.eci.arsw.blindway.entities.BlindWayException;
 import edu.eci.arsw.blindway.game.Game;
 
 /**
@@ -18,12 +19,14 @@ public interface GamePersistence {
      * @param n - la cantidad de filas del juego
      * @param m - la cantidad de columnas del juego
      */
-    public void createGame(int id, int n, int m);
+    public void createGame(int id, int n, int m) throws BlindWayException;
     /**
      * Obtiene el juego especifico
      * @param id - el identificador del juego
      * @return el juego identificado con el id
      */
-    public Game getGame(int id);
+    public Game getGame(int id) throws BlindWayException;
+    
+    
     
 }

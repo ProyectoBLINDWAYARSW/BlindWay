@@ -7,22 +7,29 @@ package edu.eci.arsw.blindway.game;
 
 import edu.eci.arsw.blindway.entities.BlindWayException;
 import edu.eci.arsw.blindway.entities.Mapa;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author masterhugo
  */
+
 public class Game {
+    
     private Mapa mapa;
+    
+    
     private boolean state;
+    
     private boolean move;
-    public Game(int n, int m){
-        try {
-            mapa = new Mapa();
-            mapa.buildMaze(n, m);
-        } catch (BlindWayException ex) {
-            
-        }
+
+    public Game() throws BlindWayException{
+        mapa = new Mapa();
+    }
+    
+    public void createGame(int n, int m) throws BlindWayException{
+        mapa.buildMaze(n, m);
     }
     
     public boolean moveLeft(){

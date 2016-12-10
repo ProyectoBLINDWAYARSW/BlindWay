@@ -2,13 +2,14 @@ package edu.eci.arsw.blindway.entities;
 
 
 import edu.eci.arsw.blindway.mazegenerator.MazeGenerator;
+import edu.eci.arsw.blindway.mazegenerator.RecursiveMazeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 /**
  * 
  * @author Hugo Alvarez
  */
-@Service
+
 public class Mapa {
 
     private final int inicioX;
@@ -25,18 +26,20 @@ public class Mapa {
 
     private final Carro carro;
 
-    @Autowired
+   
     private MazeGenerator kam;
 
     public Mapa()throws BlindWayException{
         inicioX = 0;
         inicioY = 0;
         carro = new Carro(0, 0, "Fijo");
+        kam = new RecursiveMazeGenerator();
     }
     /**
      * 
      * @param n filas
      * @param m columnas
+     * @throws edu.eci.arsw.blindway.entities.BlindWayException
      */
     public void buildMaze(int n, int m)throws BlindWayException{
         if(n <= 3 || m <= 3)throw new BlindWayException("El laberinto no pueder ser muy pequeño o con datos negativos");

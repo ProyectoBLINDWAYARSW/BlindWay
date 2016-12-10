@@ -5,7 +5,6 @@
  */
 package edu.eci.arsw.blindway;
 
-import edu.eci.arsw.blindway.entities.Mapa;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,7 +15,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class BlindWay {
     public static void main(String[] args) {
-        
         SpringApplication.run(BlindWay.class, args);
     }
 }
