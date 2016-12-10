@@ -101,5 +101,8 @@ public class Mapa {
         return carro;
     }
     
+    public boolean finish(){
+        return carro.getX()==finX && carro.getY()==finY;
+    }
     
 }
