@@ -34,7 +34,7 @@ public class GameController {
 
     @Autowired
     public ServiceGame game;
-    
+
     @RequestMapping(method = RequestMethod.GET)
     public String test(){
         return "Ok";
@@ -47,5 +47,10 @@ public class GameController {
         }
         Game g = game.getGame(id);
         return new ResponseEntity<>(g.getLabyrinth(),HttpStatus.ACCEPTED);
+    }
+    @RequestMapping(path = "/maze/{id}/{x}/{y}/car", method = RequestMethod.GET)
+    public ResponseEntity<?> getCar(@PathVariable Integer id,@PathVariable Integer x,@PathVariable Integer y) throws BlindWayException{
+        Game g = game.getGame(id);
+        return new ResponseEntity<>(g.getCar(),HttpStatus.ACCEPTED);
     }
 }
