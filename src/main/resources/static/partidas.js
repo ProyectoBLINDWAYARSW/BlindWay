@@ -14,7 +14,7 @@ refrescar = function () {
     total=0;
     $("#contenido table").empty();
     $("#contenido table").append("<th>ID Sala</th><th>Nombre creador</th><th>Jugadores</th>"); 
-    $.get("http://localhost:8080/salas", function(data,status){
+    /*$.get("http://localhost:8080/.html", function(data,status){
         
         salasDisponibles = data;
         $("#contenido table").append("<th>ID Sala 1</th><th>Nombre Leonardo</th><th>Jugadores 2</th>");
@@ -22,7 +22,7 @@ refrescar = function () {
         $("#contenido table").append("<th>ID Sala 1</th><th>Nombre Leonardo</th><th>Jugadores 2</th>");
         }
         
-    });
+    });*/
 
 };
 

@@ -24,7 +24,7 @@ public class UsuarioController {
     @RequestMapping(value="/registro",method = RequestMethod.POST)    
     public ResponseEntity<?> manejadorPostRecursoUsuario(String nombre, int edad, String genero, String nickname, String contrasena, String correoElectronico){
         try {
-            StubUsuario.getInstance().registroUsuario(nombre, edad, genero, nickname, contrasena, correoElectronico);
+            stub.registroUsuario(nombre, edad, genero, nickname, contrasena, correoElectronico);
             return new ResponseEntity<>("El usuario fue creado satisfactoriamente.",HttpStatus.CREATED);
         } catch (RegistroUsuarioException ex) {
             return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_ACCEPTABLE);            
