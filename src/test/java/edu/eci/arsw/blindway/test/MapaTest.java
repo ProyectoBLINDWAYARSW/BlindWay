@@ -97,7 +97,6 @@ public class MapaTest {
             map.moveUP();
             int x1 =map.getCarro().getX();
             int y1 =map.getCarro().getY();
-            System.out.println(x+ " "+y+ " "+x1 +" "+y1);
         }catch(BlindWayException ex){
             
         }

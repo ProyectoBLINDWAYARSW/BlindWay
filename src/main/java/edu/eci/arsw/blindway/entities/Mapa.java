@@ -42,7 +42,6 @@ public class Mapa {
      * @throws edu.eci.arsw.blindway.entities.BlindWayException
      */
     public void buildMaze(int n, int m)throws BlindWayException{
-        System.out.println("Mapa "+n+" "+m);
         if(n <= 3 || m <= 3)throw new BlindWayException("El laberinto no pueder ser muy pequeño o con datos negativos");
         this.n=n;
         this.m=m;

@@ -24,8 +24,7 @@ function datosResgistrarUsuario(){
         } 
     else {  
          genero = "m";
-        }  
-    console.log("Recogio datos");
+        } 
     //datos["nombre"]=nombre;
     //datos["edad"]=edad;
     //datos["genero"]= genero;
@@ -37,10 +36,15 @@ function datosResgistrarUsuario(){
     //registrados.push(datos);
     //stompClient.send("/app/usuario", {}, nombre+','+edad+','+genero+','+nick+','+password+','+correoElectronico);
      $.ajax({
-            url: '/usuario',
+            url: '/usuario/registro',
             type: 'post',
             dataType: 'json',
             data:  {'nombre':nombre,'edad':edad,'genero':genero,'nickname':nick,'contrasena':password,'correoElectronico': correoElectronico}
+                    
+        }).done(function(data){
+            alert(data);
+        }).fail(function(data){
+            alert(data.responseText);
         });
 }
 function connect() {
