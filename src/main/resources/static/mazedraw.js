@@ -6,8 +6,8 @@ var p = 10;
 //size of canvas
 var cw = bw + (p * 2) + 1;
 var ch = bh + (p * 2) + 1;
-var y = 6;
-var x = 7;
+var y = 5;
+var x = 6;
 var px=0;
 var py=0;
 var moveOk=true;

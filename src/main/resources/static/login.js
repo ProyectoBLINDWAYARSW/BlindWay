@@ -1,3 +1,5 @@
+/* global CryptoJS */
+
 nick="";
 function nicki(){
     sessionStorage.name=nick;
@@ -6,8 +8,8 @@ function nicki(){
 
 function check1(){
     nick=$("#Nick").val();
-    var pw=hex_sha1($("#passwd").val());
-    check2(pw)
+    var pw=CryptoJS.MD5($("#passwd").val());
+    check2(pw);
     
 }
 
@@ -28,7 +30,6 @@ function log(){
 function reg(){
     window.location.href='RegistrarUsuario.html';
 }
-
 $(document).ready(
         function () {
             sessionStorage.name="";

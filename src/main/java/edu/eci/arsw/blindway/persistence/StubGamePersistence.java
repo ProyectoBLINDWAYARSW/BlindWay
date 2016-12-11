@@ -30,7 +30,7 @@ public class StubGamePersistence implements GamePersistence{
         }         
         else{
             Game o = new Game();
-            o.createGame(n, n);
+            o.createGame(n, m);
             gamesState.put(id, o);
          
         }
