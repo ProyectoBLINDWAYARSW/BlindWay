@@ -23,6 +23,7 @@ function datosResgistrarUsuario(){
     else {  
          genero = "m";
         }  
+    console.log("Recogio datos");
     //datos["nombre"]=nombre;
     //datos["edad"]=edad;
     //datos["genero"]= genero;
@@ -32,7 +33,13 @@ function datosResgistrarUsuario(){
     
     //datos[]=(f=="")?"m":"f";
     //registrados.push(datos);
-    stompClient.send("/app/usuario", {}, nombre+','+edad+','+genero+','+nick+','+password+','+correoElectronico);
+    //stompClient.send("/app/usuario", {}, nombre+','+edad+','+genero+','+nick+','+password+','+correoElectronico);
+     $.ajax({
+            url: '/usuario',
+            type: 'post',
+            dataType: 'json',
+            data: {'caracter': nombre+','+edad+','+genero+','+nick+','+password+','+correoElectronico}
+        });
 }
 function connect() {
     var socket = new SockJS('/stompendpoint');
