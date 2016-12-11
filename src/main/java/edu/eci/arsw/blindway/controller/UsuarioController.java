@@ -9,6 +9,7 @@ import edu.eci.arsw.blindway.persistence.RegistroUsuarioException;
 import edu.eci.arsw.blindway.persistence.StubUsuario;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,14 @@ public class UsuarioController {
         try {
             stub.registroUsuario(nombre, edad, genero, nickname, contrasena, correoElectronico);
             return new ResponseEntity<>("El usuario fue creado satisfactoriamente.",HttpStatus.CREATED);
+        } catch (RegistroUsuarioException ex) {
+            return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_ACCEPTABLE);            
+        }       
+    }
+    @RequestMapping(value="/login/{user}/{pswd}",method = RequestMethod.GET)    
+    public ResponseEntity<?> manejadorPostRecursoUsuario(@PathVariable String user,@PathVariable String pswd){
+        try {
+            return new ResponseEntity<>(stub.cargarUsuarioLogeado(user, pswd),HttpStatus.ACCEPTED);
         } catch (RegistroUsuarioException ex) {
             return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_ACCEPTABLE);            
         }       
