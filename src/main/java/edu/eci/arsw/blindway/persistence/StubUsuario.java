@@ -86,6 +86,20 @@ public class StubUsuario {
         }
         return u;
     }
+    public boolean cargarUsuarioLogeado(String nick, String contrasena) throws RegistroUsuarioException {
+        boolean u = false;
+        for(Usuario us: usuarios){
+            if(us.getNickname().equals(nick)){
+                if(us.getContrasena().equals(contrasena)){
+                    u=true;
+                }
+            }
+        }
+        if (!u){
+            throw new RegistroUsuarioException("Usuario inexistente.");
+        }
+        return u;
+    }
 
     public void vaciarUsuarios() {
        usuarios.clear();
