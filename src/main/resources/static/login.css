@@ -1,10 +1,32 @@
 
-#tablaregistrarse{
+#login{
     background-color: white;
     margin-left: auto;
-    margin-right: auto;
-    position:absolute;
-    top:200px;
-    left:370px;
+    position: absolute;
+    top: 36%;
+    left: 35%;
     font-size: 30px;
+    margin-right: auto;
+}
+#log{
+    top: 52%;
+    left: 41%;
+    margin-left: auto;
+    font-size: 26px;
+    margin-right: auto;
+    position: absolute;
+    border-radius: 47px;
+    background-color: #b10f01;
+    color:black;
+}
+#home{
+    top: 63%;
+    left: 41%;
+    margin-left: auto;
+    font-size: 26px;
+    margin-right: auto;
+    position: absolute;
+    border-radius: 47px;
+    background-color: #b10f01;
+    color:black;
 }

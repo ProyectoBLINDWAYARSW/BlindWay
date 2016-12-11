@@ -64,8 +64,8 @@ tr:nth-child(even){background-color: #f2f2f2}
 #botonagregar {
     color: #b01001;
     position:absolute;
-    top:650px;
-    left:600px;
+    top:91%;
+    left:32%;
     font-size: 50px;
     border-radius: 47px;
     -moz-border-radius: 47px;
@@ -77,8 +77,8 @@ tr:nth-child(even){background-color: #f2f2f2}
 #botondevolverse {
     color: #b01001;
     position:absolute;
-    top:750px;
-    left:600px;
+    top:111%;
+    left:38%;
     font-size: 25px;
     border-radius: 21px;
     -moz-border-radius: 21px;
@@ -93,7 +93,7 @@ tr:nth-child(even){background-color: #f2f2f2}
     margin-left: auto;
     margin-right: auto;
     position:absolute;
-    top:400px;
-    left:540px;
+    top:37%;
+    left:28%;
     font-size: 30px;
 }

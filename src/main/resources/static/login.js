@@ -1,35 +1,32 @@
-/* global CryptoJS */
 
 nick="";
 function nicki(){
     sessionStorage.name=nick;
-    window.location.href='salas.html';
-};
+    window.location.href='partidas.html';
+}
 
 function check1(){
     nick=$("#Nick").val();
-    var pw=CryptoJS.MD5($("#passwd").val());
+    var pw=$("#Pass").val();
     check2(pw);
     
 }
 
 function check2(pw){
-    return $.get("/seguridad/"+username+"/"+passw, function(data){
+    return $.get("/usuario/login/"+nick+"/"+pw, function(data){
             if(data){
-                setName();
+                nicki();
             }else{
-                $("#mensaje").show();
+                alert("Algo salio mal");
             }
-    }).fail(function (){
-                $("#mensaje").show();
+    }).fail(function (data){
+                alert("Los datos ingresados son incorrectos.");
     } );
 }
-function log(){
-    window.location.href='login.html';
+function devolver(){
+    window.location.href='index.html';
 }
-function reg(){
-    window.location.href='RegistrarUsuario.html';
-}
+
 $(document).ready(
         function () {
             sessionStorage.name="";

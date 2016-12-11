@@ -8,7 +8,16 @@ and open the template in the editor.
     <head>
         <title>Login</title>
         <meta charset="UTF-8">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="login.css">
+        <script src="/login.js"></script>
+        <script src="/webjars/jquery/jquery.min.js"></script>
+        <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+        <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+        
     </head>
     <body background="fondo.jpg">
         <table id="login" >
@@ -20,6 +29,7 @@ and open the template in the editor.
                 <td> <input id="Pass" type="password" name="pass"><br></td>
             </tr>
         </table>
-        <button id="log" onclick="login()">Sign in</button>
+        <button id="log" onclick="check1()">Sign in</button>
+        <button id="home" onclick="devolver()">Home</button>
     </body>
 </html>
