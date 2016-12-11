@@ -12,9 +12,9 @@ function datosResgistrarUsuario(){
     var edad = $("#edad").val();
     var f = $("#f").val();
     var m = $("#m").val();
-    var nick= $("#nick").val();
-    var password=$("#pass").val();
-    var correoElectronico = $("#CorreoElectronico").val();
+    var nick= $("#Nick").val();
+    var password=$("#Pass").val();
+    var correoElectronico = $("#email").val();
     var genero = "no definio genero";
     
     if($("#f").is(':checked')) {  
@@ -38,7 +38,7 @@ function datosResgistrarUsuario(){
             url: '/usuario',
             type: 'post',
             dataType: 'json',
-            data:  'nombre='+nombre+'edad='+edad+'genero='+genero+'nickname='+nick+'contrasena='+password+'correoElectronico='+correoElectronico
+            data:  {'nombre':nombre,'edad':edad,'genero':genero,'nickname':nick,'contrasena':password,'correoElectronico': correoElectronico}
         });
 }
 function connect() {

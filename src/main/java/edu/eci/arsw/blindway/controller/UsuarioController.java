@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioController {
     StubUsuario stub = StubUsuario.getInstance();
     @RequestMapping(method = RequestMethod.POST)    
-    public ResponseEntity<?> manejadorPostRecursoUsuario(@RequestBody Usuario caracter){
-        System.out.println("Entra" + caracter + "  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    public ResponseEntity<?> manejadorPostRecursoUsuario(@RequestBody String caracter){
+        System.out.println("Entra " + caracter + "  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         /*try {
             System.out.println("Entra" + caracter + "  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             /*String nombre=character[0];
