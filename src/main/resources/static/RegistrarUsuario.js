@@ -5,7 +5,9 @@
  */
 var stompClient = null;
 registrados = [];
-
+function devolverse(){
+    window.location.href='index.html';
+}
 function datosResgistrarUsuario(){
     //var datos=Array();
     var nombre = $("#nombre").val();
