@@ -16,22 +16,27 @@
     font-size: 200px;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
+.selected {
+    background-color: yellow;
+}
 
 #contenido {
-    border-collapse: separate;
+    border: 4px solid black;
+    border-collapse: collapse;
     width: 40%;
     text-align: center;
     position: absolute;
-    top:600;
-    left:380;
+    top:200px;
+    left:380px;
 
 }
+
 th, td {
     text-align: left;
     padding: 8px;
 }
 th {
-   background-color: #4CAF50;
+   background-color: #b01001;
     color: white;
 }
 tr:nth-child(even){background-color: #f2f2f2}
@@ -88,7 +93,6 @@ tr:nth-child(even){background-color: #f2f2f2}
 }
 
 #tablaregistrarse{
-   
     background-color: white;
     margin-left: auto;
     margin-right: auto;

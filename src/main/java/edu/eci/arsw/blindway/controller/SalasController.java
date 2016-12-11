@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/salas")
+@RequestMapping("/salas")
 public class SalasController {
     StubSala salas = StubSala.getInstance();
     @RequestMapping(method = RequestMethod.GET)
