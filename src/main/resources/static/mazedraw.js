@@ -16,7 +16,7 @@ var myGamePiece=null;
 var myObstacles = [];
 var myScore;
 var carro=null;
-var gameid;
+var gameid=1;
 var Keys = {
         up: false,
         down: false,
@@ -42,26 +42,32 @@ var myGameArea = {
 var moveObject = function(event) {
     
     myGamePiece.clear();
-    check(event)
+    check(event);
     
     //setTimeout(moveObject, 100);
     
 };
 function start(){
+    
     console.log("Entro a dibujar 1asdasdasdasdasda");
-    gameid=1;
+    
     $.get("/blindway/maze/"+gameid+"/"+x+"/"+y, function(data){
         myGameArea.start();
-        myGamePiece = new component(30, 40, "red", 15, 15);
+        
+        
         myGameArea.context;
         //console.log("Entro "+data);
         maze=data;
         //console.log(maze[0][0]);
         //console.log(maze);
+        
+    }).then($.get("/blindway/maze/"+gameid+"/"+x+"/"+y+"/car",function(data){
+        myGamePiece = new component(30, 40, "red", 15+((data[0])*40), 15+((data[1])*50));
         drawBoard();
         myGamePiece.update();
         setInterval(updateGameArea(), 11);
-    });
+    }));
+    
    
     
 }
@@ -216,8 +222,7 @@ function updateGameArea() {
 }
 
 function check(event){
-    carro = new Carro(px,py,"Up");
-    console.log(carro);
+    
     if (event.which===38) {
         stompClient.send("/app/move."+gameid, {}, "Up");
     }
@@ -250,8 +255,8 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         
-        
         stompClient.subscribe('/topic/move.'+gameid, function (data) {
+            
             var arr =data.body.split(" "); 
             moveOk=arr[1]==='true';
             var event = arr[0];
@@ -272,10 +277,9 @@ function connect() {
             else if (event==="Right" && moveOk) {
                 px+=1;
                 myGamePiece.x+=40;
-            }
-            myGamePiece.update();
+                
+            }myGamePiece.update();
         });
-        
     });
 }
 function disconnect() {

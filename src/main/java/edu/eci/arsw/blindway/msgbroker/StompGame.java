@@ -30,7 +30,7 @@ public class StompGame {
     
     @MessageMapping("/move.{id}")  
     public void move(String s,@DestinationVariable Integer id)throws BlindWayException{
-        System.out.println("Entroooooooooo!!!!!!!!!!!!!!!");
+        System.out.println("Entroooooooooo!!!!!!!!!!!!!!! "+s+" "+id);
         Game g = game.getGame(id);
         boolean tmp = false;
         switch (s) {
@@ -49,6 +49,7 @@ public class StompGame {
             default:
                 break;
         }
+        System.out.println("Va a enviar ");
         msgt.convertAndSend("/topic/move."+id, s+" "+tmp);
     }
 }
