@@ -25,24 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioController {
     StubUsuario stub = StubUsuario.getInstance();
     @RequestMapping(method = RequestMethod.POST)    
-    public ResponseEntity<?> manejadorPostRecursoUsuario(@RequestBody String caracter){
-        System.out.println("Entra " + caracter + "  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        /*try {
-            System.out.println("Entra" + caracter + "  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            /*String nombre=character[0];
-            int edad=Integer.parseInt(character[1]);
-            String genero=character[2];
-            String nickname=character[3];
-            String contraseña=character[4];
-            String correo=character[5];
-            StubUsuario.getInstance().registroUsuario(nombre, edad, genero, nickname, contraseña, correo);
-            Mensajes.mostrarMensaje("El usuario fue creado satisfactoriamente.", "Creación completada");
+    public ResponseEntity<?> manejadorPostRecursoUsuario(String nombre, int edad, String genero, String nickname, String contrasena, String correoElectronico){
+        try {
+            StubUsuario.getInstance().registroUsuario(nombre, edad, genero, nickname, contrasena, correoElectronico);
+            System.out.println("El usuario fue creado satisfactoriamente.");
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (RegistroUsuarioException ex) {
-            Mensajes.mostrarMensaje(ex.getMessage(), "No se pudo crear usuario.");
+            System.out.println(ex.getMessage());
             return new ResponseEntity<>("Error al crear un usuario",HttpStatus.FORBIDDEN);            
         }       
-        */
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
