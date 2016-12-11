@@ -262,6 +262,7 @@ function connect() {
             var event = arr[0];
             console.log(moveOk);
             console.log(typeof moveOk);
+            myGamePiece.clear();
             if (event==="Up" && moveOk) {
                 py-=1;
                 myGamePiece.y-=50;

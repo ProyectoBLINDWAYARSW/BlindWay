@@ -38,7 +38,7 @@ function datosResgistrarUsuario(){
             url: '/usuario',
             type: 'post',
             dataType: 'json',
-            data: {'caracter': nombre+','+edad+','+genero+','+nick+','+password+','+correoElectronico}
+            data:  'nombre='+nombre+'edad='+edad+'genero='+genero+'nickname='+nick+'contrasena='+password+'correoElectronico='+correoElectronico
         });
 }
 function connect() {

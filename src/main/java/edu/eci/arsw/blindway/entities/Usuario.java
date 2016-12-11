@@ -14,7 +14,7 @@ public class Usuario {
 
     private String nickname;
 
-    private String contraseña;
+    private String contrasena;
 
     private String correoElectronico;
 
@@ -28,12 +28,12 @@ public class Usuario {
     
     private boolean conectado;
     
-    public Usuario(String nombre, int edad, String genero, String nickname, String contraseña, String correoElectronico) {
+    public Usuario(String nombre, int edad, String genero, String nickname, String contrasena, String correoElectronico) {
         this.nombre = nombre;
         this.edad = edad;
         this.genero = genero;
         this.nickname = nickname;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
         this.correoElectronico = correoElectronico;
         this.conectado=false;
         this.bloqueados=new LinkedList();
@@ -104,17 +104,17 @@ public class Usuario {
     }
 
     /**
-     * @return the contraseña
+     * @return the contrasena
      */
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
     /**
-     * @param contraseña the contraseña to set
+     * @param contrasna the contrasena to set
      */
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     /**

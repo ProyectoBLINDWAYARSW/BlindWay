@@ -6,6 +6,7 @@
 package edu.eci.arsw.blindway.controller;
 
 import edu.eci.arsw.blindway.entities.Mensajes;
+import edu.eci.arsw.blindway.entities.Usuario;
 import edu.eci.arsw.blindway.persistence.RegistroUsuarioException;
 import edu.eci.arsw.blindway.persistence.StubUsuario;
 import org.springframework.http.HttpStatus;
@@ -24,11 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioController {
     StubUsuario stub = StubUsuario.getInstance();
     @RequestMapping(method = RequestMethod.POST)    
-    public ResponseEntity<?> manejadorPostRecursoUsuario(@RequestBody String caracter){
-        try {
+    public ResponseEntity<?> manejadorPostRecursoUsuario(@RequestBody Usuario caracter){
+        System.out.println("Entra" + caracter + "  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        /*try {
             System.out.println("Entra" + caracter + "  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            String[] character=caracter.split(",");
-            String nombre=character[0];
+            /*String nombre=character[0];
             int edad=Integer.parseInt(character[1]);
             String genero=character[2];
             String nickname=character[3];
@@ -40,6 +41,8 @@ public class UsuarioController {
         } catch (RegistroUsuarioException ex) {
             Mensajes.mostrarMensaje(ex.getMessage(), "No se pudo crear usuario.");
             return new ResponseEntity<>("Error al crear un usuario",HttpStatus.FORBIDDEN);            
-        }        
+        }       
+        */
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
