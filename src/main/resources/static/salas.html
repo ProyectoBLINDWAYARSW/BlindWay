@@ -16,6 +16,17 @@ and open the template in the editor.
     </head>
     <body background="fondo.jpg" align="center">
         <div>Sala 1</div>
-        <button onclick="enter()">Enter</button>
+        <div id="contenido" style="overflow-x:auto;">
+            <table id="tablasalas" style="width:100%">
+              <tr>
+                <th>ID Sala</th>
+                <th>Nombre creador</th> 
+                <th>Jugadores</th> 
+              </tr>
+            </table>
+
+        </div>
+        <button onclick="enter()">Entrar</button>
+        <button onclick="refrescar()">Refrescar</button>
     </body>
 </html>

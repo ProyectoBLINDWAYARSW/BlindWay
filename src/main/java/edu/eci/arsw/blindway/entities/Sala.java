@@ -14,9 +14,7 @@ public class Sala {
 
 	private List<Usuario> expulsados;
 
-	private String contraseña;
-        
-        private StubUsuario dataUsuario = StubUsuario.getInstance();       
+	private String contraseña;    
         
         public Sala(Usuario jugador1, String contraseña, int id) {
             this.jugador1 = jugador1;
@@ -43,12 +41,6 @@ public class Sala {
             return res;
         }
         
-	public void invitacionGlobal() {
-                for(Usuario u:dataUsuario.usuariosConectados()){
-                    Invitacion i = new Invitacion(jugador1,u,this);
-                    //enviar invitación
-                }
-	}
 
 	public void InvitacionAmigos() {
                 for(Usuario u:jugador1.getAmigos()){

@@ -8,6 +8,7 @@ package edu.eci.arsw.blindway.persistence;
 import edu.eci.arsw.blindway.entities.Sala;
 import edu.eci.arsw.blindway.entities.Usuario;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -96,5 +97,9 @@ public class StubSala {
 
     public void vaciarSalas() {
         salasActuales.clear();
+    }
+
+    public ArrayList<Sala> obtenerSalas() {
+        return salasActuales;
     }
 }
