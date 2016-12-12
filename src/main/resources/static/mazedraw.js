@@ -53,15 +53,12 @@ function start(){
     
     $.get("/blindway/maze/"+gameid+"/"+x+"/"+y, function(data){
         myGameArea.start();
-        
-        
-        myGameArea.context;
         //console.log("Entro "+data);
         maze=data;
         //console.log(maze[0][0]);
         //console.log(maze);
         
-    }).then($.get("/blindway/maze/"+gameid+"/"+x+"/"+y+"/car",function(data){
+    }).done($.get("/blindway/maze/"+gameid+"/"+x+"/"+y+"/car",function(data){
         myGamePiece = new component(30, 40, "red", 15+((data[0])*40), 15+((data[1])*50));
         drawBoard();
         myGamePiece.update();
@@ -85,7 +82,7 @@ function component(width, height, color, x, y) {
     this.update = function() {
         //console.log("Entro a dibujar");
         ctx = myGameArea.context;
-        ctx.fillStyle = color;
+        ctx.fillStyle = "red";
         ctx.fillRect(this.x, this.y, this.width, this.height);
     };
     this.newPos = function() {
@@ -200,17 +197,6 @@ function updateGameArea() {
     }
     myGameArea.clear();
     myGameArea.frameNo += 1;
-    if (myGameArea.frameNo === 1 || everyinterval(150)) {
-        /*x = myGameArea.canvas.width;
-        minHeight = 20;
-        maxHeight = 200;
-        height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
-        minGap = 50;
-        maxGap = 200;
-        gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-        myObstacles.push(new component(10, height, "green", x, 0));
-        myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));*/
-    }
     /*for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].x += -1;
         myObstacles[i].update();

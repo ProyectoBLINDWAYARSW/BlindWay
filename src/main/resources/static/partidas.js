@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 var salasDisponibles = new Salas();
-
+sessionStorage.iden="";
 function enter(){
     window.location.href='sala.html';
 }
@@ -20,7 +20,7 @@ refrescar = function () {
     total=0;
     $("#contenido table").empty();
     $("#contenido table").append("<tr><th>ID Sala</th><th>Nombre creador</th><th>Jugadores</th></tr>"); 
-    $.get("http://localhost:8080/salas", function(data,status){
+    $.get("/salas", function(data,status){
         console.log(data);
         var usu1 = null;
         var usu2 = null;
@@ -64,10 +64,24 @@ refrescar = function () {
     });
 
 };
+function crear(){
+    var id = Math.floor((Math.random() * 20465234) + 1);
+    sessionStorage.iden=id+"";
+    window.location.href = 'sala.html';
+}
 
+function validar() {
+    if (sessionStorage.name == null || sessionStorage.name.length == 0) {
+        signOut();
+    }
+}
+function signOut(){
+    window.location.href = 'index.html';
+}
 
 $(document).ready(
     function () {
+        validar();
         $('tr').click(function() {
             $('.selected').removeClass('selected');
             $(this).addClass('selected');
