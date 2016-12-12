@@ -16,6 +16,8 @@ refrescar = function () {
     $("#contenido table").append("<tr><th>ID Sala</th><th>Nombre creador</th><th>Jugadores</th></tr>"); 
     $.get("http://localhost:8080/salas", function(data,status){  
         salasDisponibles = data;
+        console.log(data);
+        console.log(status);
         $("#contenido table").append("<tr><th>1</th><th>Emiya</th><th>2</th></tr>");
         for(i = 0; i < data.length; i++){
         $("#contenido table").append("<tr><th>1</th><th>Emiya</th><th>2</th></tr>");
