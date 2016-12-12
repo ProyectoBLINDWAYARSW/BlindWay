@@ -32,16 +32,7 @@ public class SalasController {
     StubSala salas = StubSala.getInstance();
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> manejadorGetRecursoSalas() {
-        try {
-            StubUsuario.getInstance().registroUsuario("Leonardo Herrera",20,"Masculino","Saiga","contraseña123","leonardo.ft3@gmail.com");
-            Usuario u=StubUsuario.getInstance().cargarUsuarioPorNick("Saiga");
-            int id = StubSala.getInstance().crearSala(u);
-            StubUsuario.getInstance().vaciarUsuarios();
-            ArrayList<Sala> data = salas.obtenerSalas();
-            return new ResponseEntity<>(data,HttpStatus.ACCEPTED);
-        } catch (RegistroUsuarioException | CreacionSalaException ex) {
-            Logger.getLogger(SalasController.class.getName()).log(Level.SEVERE, null, ex);
-            return new ResponseEntity<>(ex.getMessage(),HttpStatus.ACCEPTED);
-        }
+        ArrayList<Sala> data = salas.obtenerSalas();
+        return new ResponseEntity<>(data,HttpStatus.ACCEPTED);
     }
 }

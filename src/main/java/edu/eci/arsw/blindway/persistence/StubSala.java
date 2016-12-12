@@ -52,7 +52,7 @@ public class StubSala {
     public int crearSala(Usuario u) throws CreacionSalaException {
         synchronized(instance){
             for(Sala s: salasActuales){
-                if (s.getJugador1().getNickname().equals(u.getNickname()) || s.getJugador2().getNickname().equals(u.getNickname())){
+                if (s.getJugador1().getNickname().equals(u.getNickname())){
                     throw new CreacionSalaException("El jugador ya se encuentra en una sala, no puede estar en otra.");
                 }
             }
