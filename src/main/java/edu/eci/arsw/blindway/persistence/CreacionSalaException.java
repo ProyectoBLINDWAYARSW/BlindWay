@@ -9,7 +9,7 @@ package edu.eci.arsw.blindway.persistence;
  *
  * @author 2107262
  */
-class CreacionSalaException extends Exception {
+public class CreacionSalaException extends Exception {
 
     public CreacionSalaException(String mensaje) {
         super(mensaje);

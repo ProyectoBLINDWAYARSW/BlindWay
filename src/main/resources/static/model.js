@@ -9,14 +9,17 @@ function Usuarios(){
 }
 
 Usuarios.prototype.agregarUsuario= function(usuario){
-    this.registrados.push(usuarios);
+    this.registrados.push(usuario);
 };
+
 function Salas(){
-    this.salasDisponibles = []
+    this.salasDisponibles = [];
 }
-Salas.prototype.agregarSala=function(sala){
+
+Salas.prototype.agregarSala = function(sala){
     this.salasDisponibles.push(sala);
-}
+};
+
 function Usuario(nombre, edad, genero,nick, pass, correo){
     this.nombre=nombre;
     this.edad =edad;
