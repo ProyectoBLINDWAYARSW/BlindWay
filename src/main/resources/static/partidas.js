@@ -52,8 +52,8 @@ refrescar = function () {
             console.log(sal);
             salasDisponibles.agregarSala(sal);
         });
-        $.each(salasDisponibles,function(ind,val){
-            console.log(ind+" "+val);
+        $.each(salasDisponibles.salasDisponibles,function(ind,val){
+            console.log(ind+"!!!!!!!!!!!!!!!!!!!!!!!!!!11 "+val);
         })
         
         $("#contenido table").append("<tr><th>1</th><th>Emiya</th><th>2</th></tr>");
