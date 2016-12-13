@@ -78,11 +78,10 @@ refrescar = function () {
              
              $.get("/salas/choose/"+sessionStorage.name+"/"+id).done(function(data){
                  if(data){
-                    alert($("#tablasalas tr.selected td:first").html());
                     console.log(sessionStorage.iden.length);
                     window.location.href='sala.html';
                  }else{
-                     alert("No se pudo ingresar a la sala");
+                    alert("No se pudo ingresar a la sala");
                  }
              }).fail(function(){
                  alert("No se pudo ingresar a la sala");

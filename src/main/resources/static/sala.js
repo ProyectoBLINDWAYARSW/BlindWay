@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 var sal = null;
-
+var SalId = null;
 function game(){
     window.location.href='game.html';
 }
@@ -43,6 +43,7 @@ function creacion(){
                 }
                 if(ind === "id"){
                     id = val;
+                    SalId = val;
                 }
                 if(ind === "expulsados"){
                     expulsados = val;
@@ -66,7 +67,7 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         
-        stompClient.subscribe('/topic/move.'+gameid, function (data) {
+        stompClient.subscribe('/topic/load.'+gameid, function (data) {
          
         });
     });
@@ -82,5 +83,10 @@ $(document).ready(
     function () {
         validar();
         creacion();
+        connect();
+        var SD = JSON.parse(sessionStorage.SD);
+        if(SalId!==null){
+            
+        }
     }
 );
