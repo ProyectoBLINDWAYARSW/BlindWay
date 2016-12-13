@@ -59,6 +59,28 @@ function creacion(){
             SD.salasDisponibles.push(sal);
             console.log(SD);
             sessionStorage.SD = JSON.stringify(SD);
+            if(SalId!==null){
+                console.log("Entro");
+                var form = document.createElement('form');
+                form.id="formula";
+                var input1 = document.createElement('input');
+                input1.name="rol";
+                input1.value="obs";
+                input1.type="radio";
+                input1.innerHTML="Observador";
+                form.appendChild(input1);
+                form.appendChild(document.createTextNode("Observador"));
+                var br = document.createElement('br');
+                form.appendChild(br);
+                var input2 = document.createElement('input');
+                input2.name="rol";
+                input2.value="con";
+                input2.type="radio";
+                input2.innerHTML="Controlador";
+                form.appendChild(input2);
+                form.appendChild(document.createTextNode("Controlador"));
+                document.body.insertBefore(form,document.body.childNodes[0]);
+            }
         });
     }
 }
@@ -67,7 +89,7 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         
-        stompClient.subscribe('/topic/load.'+gameid, function (data) {
+        stompClient.subscribe('/topic/load.'+SalId, function (data) {
          
         });
     });
@@ -82,11 +104,8 @@ function disconnect() {
 $(document).ready(
     function () {
         validar();
-        creacion();
+        creacion();       
         connect();
-        var SD = JSON.parse(sessionStorage.SD);
-        if(SalId!==null){
-            
-        }
+        
     }
 );

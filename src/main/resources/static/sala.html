@@ -9,6 +9,7 @@ and open the template in the editor.
         <title>Sala</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="sala.css">
         <script src="/webjars/jquery/jquery.min.js"></script>
         <script src="/webjars/sockjs-client/sockjs.min.js"></script>
         <script src="/webjars/stomp-websocket/stomp.min.js"></script>
@@ -17,9 +18,9 @@ and open the template in the editor.
     </head>
     <body background="fondo.jpg">
         <div id="nameroom">Sala </div>
-        <button onclick="game()">Start Game</button>
+        <button id="game" onclick="game()">Start Game</button>
         <div id="contenido" style="overflow-x:auto;">
-            <table id="tablasalas" style="width:100%">
+            <table id="tablasala" style="width:100%">
               <thead>
                 <tr>
                 <th>Jugador</th>
