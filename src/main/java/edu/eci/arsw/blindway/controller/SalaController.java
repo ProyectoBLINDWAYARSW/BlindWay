@@ -41,5 +41,14 @@ public class SalaController {
             Logger.getLogger(SalasController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_ACCEPTABLE);
         }
+    }
+    @RequestMapping(path="/obtencion/{id}",method = RequestMethod.GET)
+    public ResponseEntity<?> manejadorGetRecursoSalaCreacion(@PathVariable Integer id) {
+        try {
+            return new ResponseEntity<>(StubSala.getInstance().obtenerSala(id),HttpStatus.ACCEPTED);
+        } catch (CreacionSalaException ex) {
+            Logger.getLogger(SalasController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_ACCEPTABLE);
+        }
     } 
 }

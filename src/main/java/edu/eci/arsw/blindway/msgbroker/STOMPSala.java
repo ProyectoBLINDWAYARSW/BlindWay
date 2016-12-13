@@ -30,4 +30,10 @@ public class STOMPSala {
            msgt.convertAndSend("/topic/load."+id, u);
         }   
     }
+    @MessageMapping("/play.{id}")    
+    public void playGame(@DestinationVariable Integer id,Boolean b) throws Exception {    
+        synchronized(msgt){
+           msgt.convertAndSend("/topic/play."+id,b);
+        }   
+    }
 }

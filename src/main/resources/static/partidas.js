@@ -81,7 +81,8 @@ refrescar = function () {
                  if(data){
                     console.log(id, sessionStorage.name);
                     stompClient.send("/app/load."+id, {}, sessionStorage.name);
-                    //window.location.href='sala.html';
+                    sessionStorage.SalaId=id;
+                    window.location.href='sala.html';
                  }else{
                     alert("No se pudo ingresar a la sala");
                  }

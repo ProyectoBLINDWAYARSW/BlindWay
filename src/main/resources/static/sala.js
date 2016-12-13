@@ -7,8 +7,19 @@ var sal = null;
 var SalId;
 var stompClient = null;
 var usu2 = null;
+sessionStorage.SalaId;
 function game(){
-    window.location.href='game.html';
+    if(usu2!==null){
+        var p = $("#obs").is(":checked");
+        stompClient.send("/app/play."+SalId, {}, p);
+        if(p){
+            window.location.href='game2.html';
+        }else{
+            window.location.href='game1.html';
+        }
+    }
+    
+    
 }
 
 function validar() {
@@ -93,6 +104,40 @@ function creacion(){
                 document.body.insertBefore(form,document.body.childNodes[0]);
             }
         }).then(connect);
+    }else{
+        $("#contenido table").empty();
+        $("#contenido table").append("<thead><tr><th>Usuario</th></thead><tbody></tbody>");
+        $.get("/room/obtencion/"+sessionStorage.SalaId,function(data){
+            var usu1 = null;
+            var id = null;
+            var expulsados = null;
+            var cons = null;
+            $.each(data,function(ind,val){
+                console.log(ind + " "+ val);
+                if(isObject(val) && !isArray(val)){
+                    if(usu1===null){
+                        usu1 = new Usuario(val.nombre,val.edad,val.genero,val.nickname,val.contrasena,val.correoElectronico);
+                        console.log(usu1);
+                    }else{
+                        usu2 = new Usuario(val.nombre,val.edad,val.genero,val.nickname,val.contrasena,val.correoElectronico);
+                    }
+                }
+                if(ind === "id"){
+                    id = val;
+                    SalId = val;
+                }
+                if(ind === "expulsados"){
+                    expulsados = val;
+                }
+                if(ind === "contraseña"){
+                    cons = val;
+                }
+            });
+            $("#tablasala tbody").append("<tr><td>"+usu1.nick+"</td></tr>");
+            $("#tablasala tbody").append("<tr><td>"+usu2.nick+"</td></tr>");
+            $("#game").remove();
+            sal = new Sala(id,usu1,usu2,expulsados,cons);
+        }).then(connect)
     }
 }
 function connect() {
@@ -111,6 +156,14 @@ function connect() {
                 ck = "Observador";
             }
             $("#tablasala tbody").append("<tr><td>"+usu2.nick+"</td><td id=\"crol2\">"+ck+"</td></tr>");
+        });
+        stompClient.subscribe('/topic/play.'+SalId, function (data) {
+            if(data){
+                window.location.href='game1.html';
+            }else{
+                window.location.href='game2.html';
+            }
+            
         });
     });
 }
