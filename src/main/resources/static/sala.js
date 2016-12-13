@@ -6,6 +6,7 @@
 var sal = null;
 var SalId;
 var stompClient = null;
+var usu2 = null;
 function game(){
     window.location.href='game.html';
 }
@@ -28,7 +29,6 @@ function creacion(){
     if(sessionStorage.iden!==null && sessionStorage.iden.length > 0){
         $.get("/room/creacion/"+sessionStorage.name,function(data){
             var usu1 = null;
-            var usu2 = null;
             var id = null;
             var expulsados = null;
             var cons = null;
@@ -92,7 +92,7 @@ function creacion(){
                 form.appendChild(span);
                 document.body.insertBefore(form,document.body.childNodes[0]);
             }
-        }).then(connect());
+        }).then(connect);
     }
 }
 function connect() {
@@ -101,7 +101,16 @@ function connect() {
     stompClient.connect({}, function (frame) {
         
         stompClient.subscribe('/topic/load.'+SalId, function (data) {
-            console.log(data);
+            var bod = JSON.parse(data.body);
+            console.log("Maldita sea "+bod.nickname);
+            usu2 = new Usuario(bod.nombre, bod.edad, bod.genero, bod.nickname, bod.contrasena, bod.correoElectronico);
+            var ck ="";
+            if($("#obs").is(":checked")){
+                ck = "Controlador";
+            }else{
+                ck = "Observador";
+            }
+            $("#tablasala tbody").append("<tr><td>"+usu2.nick+"</td><td id=\"crol2\">"+ck+"</td></tr>");
         });
     });
 }
@@ -116,9 +125,11 @@ function change(form){
     if($("#obs").is(":checked")){
         console.log("Entro 1");
         document.getElementById("crol").innerHTML = "Observador";
+        document.getElementById("crol2").innerHTML = "Controlador";
     }else{
         console.log("Entro 2");
         document.getElementById("crol").innerHTML = "Controlador";
+        document.getElementById("crol2").innerHTML = "Observador";
     }
 }
 $(document).ready(
