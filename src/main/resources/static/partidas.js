@@ -20,7 +20,7 @@ refrescar = function () {
     //actualizar la presentación
     total=0;
     $("#contenido table").empty();
-    $("#contenido table").append("<tr><th>ID Sala</th><th>Nombre creador</th><th>Jugadores</th></tr>");
+    $("#contenido table").append("<thead><tr><th>ID Sala</th><th>Nombre creador</th><th>Jugadores</th></tr></thead><tbody></tbody>");
     $.get("/salas", function(data,status){
         console.log(data);
         var SD = JSON.parse(sessionStorage.SD);
@@ -66,12 +66,22 @@ refrescar = function () {
         
         $.each(SD.salasDisponibles,function(index,value){
             var cont = (value.jugador2 !== null) ? 2 : 1;
-            $("#contenido table").append("<tr><th>"+value.id+"</th><th>"+value.jugador1.nick+"</th><th>"+cont+"</th></tr>");
+            $("#tablasalas tbody").append("<tr><td>"+value.id+"</td><td>"+value.jugador1.nick+"</td><td>"+cont+"</td></tr>");
         });
-        
+        $("#tablasalas tbody").on('click','tr',function(){
+              $(this).toggleClass('selected');
+         });
+
+         $('#elegir').click(function(){
+             alert($("#tablasalas tr.selected td:first").html());
+         });
     });
 
 };
+
+
+
+
 function crear(){
     var id = Math.floor((Math.random() * 20465234) + 1);
     sessionStorage.iden=id+"";
@@ -90,15 +100,6 @@ function signOut(){
 $(document).ready(
     function () {
         validar();
-        $('tr').click(function() {
-            $('.selected').removeClass('selected');
-            $(this).addClass('selected');
-        });
-
-        $('#elegir').click(function() {    
-            $('.selected').children().each(function() {
-                alert($(this).html());
-            });
-        });
+        
     }
 );

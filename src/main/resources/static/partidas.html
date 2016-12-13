@@ -18,18 +18,22 @@ and open the template in the editor.
         <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     </head>
     <body background="fondo.jpg">
-        <div>Sala 1</div>
+        <div id="Titulo">Choose a room</div>
         <div id="contenido" style="overflow-x:auto;">
             <table id="tablasalas" style="width:100%">
-              <tr>
+              <thead>
+                <tr>
                 <th>ID Sala</th>
                 <th>Nombre creador</th>
                 <th>Jugadores</th> 
-              </tr>
+                </tr>
+              </thead>
+              <tbody>
+                  
+              </tbody>
             </table>
         </div>
-        <button  onclick="enter()"> Login</button>
-        <button  onclick="refrescar()"> Refrescar</button>
+        <button  id="refresh" onclick="refrescar()"> Refrescar</button>
         <button  id="elegir">Elegir sala</button>
         <button  id="creacion" onclick="crear()">Crear sala</button>
         
