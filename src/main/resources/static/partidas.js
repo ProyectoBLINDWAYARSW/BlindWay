@@ -23,16 +23,16 @@ refrescar = function () {
     $("#contenido table").append("<tr><th>ID Sala</th><th>Nombre creador</th><th>Jugadores</th></tr>");
     $.get("/salas", function(data,status){
         console.log(data);
-        var usu1 = null;
-        var usu2 = null;
-        var id = null;
-        var expulsados = null;
-        var cons = null;
         var SD = JSON.parse(sessionStorage.SD);
         SD.salasDisponibles = [];
         $.each(data,function(index,value){
+            var usu1 = null;
+            var usu2 = null;
+            var id = null;
+            var expulsados = null;
+            var cons = null;
             $.each(value,function(ind,val){
-                console.log(ind + " "+ val);val
+                console.log(ind + " "+ val);
                 if(isObject(val) && !isArray(val)){
                     if(usu1===null){
                         usu1 = new Usuario(val.nombre,val.edad,val.genero,val.nickname,val.contrasena,val.correoElectronico);
@@ -40,7 +40,7 @@ refrescar = function () {
                     }else{
                         usu2 = new Usuario(val.nombre,val.edad,val.genero,val.nickname,val.contrasena,val.correoElectronico);
                     }
-                }val
+                }
                 if(ind === "id"){
                     id = val;
                 }
@@ -65,9 +65,6 @@ refrescar = function () {
         });
         
         $.each(SD.salasDisponibles,function(index,value){
-            var id = null;
-            var usu3 = null;
-            var usu4 = null;
             var cont = (value.jugador2 !== null) ? 2 : 1;
             $("#contenido table").append("<tr><th>"+value.id+"</th><th>"+value.jugador1.nick+"</th><th>"+cont+"</th></tr>");
         });
