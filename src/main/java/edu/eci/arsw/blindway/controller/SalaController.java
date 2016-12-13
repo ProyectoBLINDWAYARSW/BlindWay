@@ -39,7 +39,7 @@ public class SalaController {
             return new ResponseEntity<>(StubSala.getInstance().obtenerSala(id),HttpStatus.ACCEPTED);
         } catch (RegistroUsuarioException | CreacionSalaException ex) {
             Logger.getLogger(SalasController.class.getName()).log(Level.SEVERE, null, ex);
-            return new ResponseEntity<>(ex.getMessage(),HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_ACCEPTABLE);
         }
     } 
 }

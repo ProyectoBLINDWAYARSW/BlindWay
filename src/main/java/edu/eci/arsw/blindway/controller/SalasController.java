@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,5 +35,15 @@ public class SalasController {
     public ResponseEntity<?> manejadorGetRecursoSalas() {
         ArrayList<Sala> data = salas.obtenerSalas();
         return new ResponseEntity<>(data,HttpStatus.ACCEPTED);
+    }
+    @RequestMapping(path="/choose/{nick}/{id}",method = RequestMethod.GET)
+    public ResponseEntity<?> manejadorUnionSalas(@PathVariable String nick,@PathVariable Integer id) {
+        try {
+            Usuario u = StubUsuario.getInstance().cargarUsuarioPorNick(nick);
+            Sala s = salas.obtenerSala(id);
+            return new ResponseEntity<>(s.ingresarSala(u, ""),HttpStatus.ACCEPTED);
+        } catch (CreacionSalaException | RegistroUsuarioException ex) {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 }

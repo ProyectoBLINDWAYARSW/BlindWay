@@ -69,11 +69,24 @@ refrescar = function () {
             $("#tablasalas tbody").append("<tr><td>"+value.id+"</td><td>"+value.jugador1.nick+"</td><td>"+cont+"</td></tr>");
         });
         $("#tablasalas tbody").on('click','tr',function(){
+            $("#tablasalas tbody tr").removeClass("selected");
               $(this).toggleClass('selected');
          });
 
          $('#elegir').click(function(){
-             alert($("#tablasalas tr.selected td:first").html());
+             var id = $("#tablasalas tr.selected td:first").html();
+             
+             $.get("/salas/choose/"+sessionStorage.name+"/"+id).done(function(data){
+                 if(data){
+                    alert($("#tablasalas tr.selected td:first").html());
+                    console.log(sessionStorage.iden.length);
+                    window.location.href='sala.html';
+                 }else{
+                     alert("No se pudo ingresar a la sala");
+                 }
+             }).fail(function(){
+                 alert("No se pudo ingresar a la sala");
+             });
          });
     });
 

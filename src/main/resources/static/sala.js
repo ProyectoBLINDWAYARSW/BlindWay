@@ -24,7 +24,7 @@ isArray = function(a) {
     return (!!a) && (a.constructor === Array);
 };
 function creacion(){
-    if(sessionStorage.iden!==null || sessionStorage.iden.length > 0){
+    if(sessionStorage.iden!==null && sessionStorage.iden.length > 0){
         $.get("/room/creacion/"+sessionStorage.name,function(data){
             var usu1 = null;
             var usu2 = null;
