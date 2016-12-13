@@ -6,7 +6,11 @@
 package edu.eci.arsw.blindway.msgbroker;
 
 import edu.eci.arsw.blindway.entities.Invitacion;
+import edu.eci.arsw.blindway.entities.Usuario;
+import edu.eci.arsw.blindway.persistence.StubSala;
+import edu.eci.arsw.blindway.persistence.StubUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
@@ -17,10 +21,11 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 public class STOMPSala {
     @Autowired
     SimpMessagingTemplate msgt;
-    @MessageMapping("/invitacion")    
-    public void getInvitacion(Invitacion inv) throws Exception {    
+    @MessageMapping("/load.{id}")    
+    public void chooseRoom(String name,@DestinationVariable Integer id) throws Exception {    
         synchronized(msgt){
-           inv.getDestino().añadirInvitacion(inv);
+           Usuario u=StubUsuario.getInstance().cargarUsuarioPorNick(name);
+           msgt.convertAndSend("/topic/load."+id, u);
         }   
     }
 }

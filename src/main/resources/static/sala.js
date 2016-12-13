@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 var sal = null;
-var SalId = null;
+var SalId;
+var stompClient = null;
 function game(){
     window.location.href='game.html';
 }
@@ -88,11 +89,10 @@ function creacion(){
                 form.appendChild(br1);
                 var span = document.createElement('span');
                 span.innerHTML = '<button id="but" onclick="change(this.form)" type="button">Choose</button>';
-                
                 form.appendChild(span);
                 document.body.insertBefore(form,document.body.childNodes[0]);
             }
-        });
+        }).then(connect());
     }
 }
 function connect() {
@@ -101,7 +101,7 @@ function connect() {
     stompClient.connect({}, function (frame) {
         
         stompClient.subscribe('/topic/load.'+SalId, function (data) {
-         
+            console.log(data);
         });
     });
 }
@@ -124,8 +124,7 @@ function change(form){
 $(document).ready(
     function () {
         validar();
-        creacion();       
-        connect();
+        creacion()
         
     }
 );

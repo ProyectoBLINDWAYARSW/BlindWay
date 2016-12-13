@@ -6,6 +6,7 @@
 var salasDisponibles = new Salas();
 sessionStorage.iden="";
 sessionStorage.SD= JSON.stringify(new Salas());
+var stompClient = null;
 function enter(){
     window.location.href='sala.html';
 }
@@ -78,8 +79,9 @@ refrescar = function () {
              
              $.get("/salas/choose/"+sessionStorage.name+"/"+id).done(function(data){
                  if(data){
-                    console.log(sessionStorage.iden.length);
-                    window.location.href='sala.html';
+                    console.log(id, sessionStorage.name);
+                    stompClient.send("/app/load."+id, {}, sessionStorage.name);
+                    //window.location.href='sala.html';
                  }else{
                     alert("No se pudo ingresar a la sala");
                  }
@@ -108,10 +110,22 @@ function validar() {
 function signOut(){
     window.location.href = 'index.html';
 }
-
+function connect() {
+    var socket = new SockJS('/stompendpoint');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+    });
+}
+function disconnect() {
+    if (stompClient != null) {
+        stompClient.disconnect();
+    }
+    setConnected(false);
+    console.log("Disconnected");
+}
 $(document).ready(
     function () {
         validar();
-        
+        connect();
     }
 );
