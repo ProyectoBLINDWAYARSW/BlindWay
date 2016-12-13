@@ -52,6 +52,7 @@ function creacion(){
                     cons = val;
                 }
             });
+            $("#tablasala tbody").append("<tr><td>"+usu1.nick+"</td><td id=\"crol\">Controlador</td></tr>");
             sal = new Sala(id,usu1,usu2,expulsados,cons);
             var SD = JSON.parse(sessionStorage.SD);
             var SDN = new Salas();
@@ -64,21 +65,31 @@ function creacion(){
                 var form = document.createElement('form');
                 form.id="formula";
                 var input1 = document.createElement('input');
+                input1.id="obs";
                 input1.name="rol";
                 input1.value="obs";
                 input1.type="radio";
-                input1.innerHTML="Observador";
+                input1.onclick=0;
+                input1.checked=false;
                 form.appendChild(input1);
                 form.appendChild(document.createTextNode("Observador"));
                 var br = document.createElement('br');
                 form.appendChild(br);
                 var input2 = document.createElement('input');
+                input2.id="con";
                 input2.name="rol";
                 input2.value="con";
                 input2.type="radio";
-                input2.innerHTML="Controlador";
+                input2.onclick=0;
+                input2.checked=true;
                 form.appendChild(input2);
                 form.appendChild(document.createTextNode("Controlador"));
+                var br1 = document.createElement('br');
+                form.appendChild(br1);
+                var span = document.createElement('span');
+                span.innerHTML = '<button id="but" onclick="change(this.form)" type="button">Choose</button>';
+                
+                form.appendChild(span);
                 document.body.insertBefore(form,document.body.childNodes[0]);
             }
         });
@@ -100,6 +111,15 @@ function disconnect() {
     }
     setConnected(false);
     console.log("Disconnected");
+}
+function change(form){
+    if($("#obs").is(":checked")){
+        console.log("Entro 1");
+        document.getElementById("crol").innerHTML = "Observador";
+    }else{
+        console.log("Entro 2");
+        document.getElementById("crol").innerHTML = "Controlador";
+    }
 }
 $(document).ready(
     function () {
